@@ -121,9 +121,9 @@ void visPalette::openFile(const QString& fileName) {
   QJsonArray sections = obj["include"].toArray();
 
   // Iterate over each section.
-  for (auto section : sections) {
+  for (auto s : sections) {
     // Read section file.
-    QString sectionFileName = QFileInfo(dir + "/" + section.toString()).absoluteFilePath();
+    QString sectionFileName = QFileInfo(dir + "/" + s.toString()).absoluteFilePath();
     QFile sectionFile(sectionFileName);
     if (!sectionFile.open(QIODevice::ReadOnly)) {
       qWarning("WARNING: Could not open section file for reading.");

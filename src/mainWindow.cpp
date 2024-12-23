@@ -105,6 +105,9 @@ void MainWindow::createToolBar() {
   acRunWorkflow = bar->addAction(QIcon(":/icons/run-workflow.png"), "");
   connect(acRunWorkflow, &QAction::triggered, this, &MainWindow::runWorkflow);
 
+  // Set icon size for actions.
+  bar->setIconSize(QSize(24, 24));
+
   // Set hints for actions.
   acOpenPalette->setToolTip("Open Palette");
   acNewWorkflow->setToolTip("New Workflow");
@@ -115,7 +118,7 @@ void MainWindow::createToolBar() {
   acRunWorkflow->setToolTip("Run Workflow");
 
   // Only enable open-palette action at the beginning.
-  acOpenPalette->setEnabled(true);
+  acOpenPalette->setEnabled(true); 
   acNewWorkflow->setEnabled(false);
   acOpenWorkflow->setEnabled(false);
   acSaveWorkflow->setEnabled(false);
@@ -568,10 +571,6 @@ void MainWindow::runWorkflow() {
   QMenu menu;
   QAction* action1 = menu.addAction("Send Workflow to Python");
   connect(action1, &QAction::triggered, this, &MainWindow::sendToPython);
-  QAction* action2 = menu.addAction("Send Workflow to FormingSuite");
-  connect(action2, &QAction::triggered, this, &MainWindow::sendToFormingSuite);
-  QAction* action3 = menu.addAction("Send Workflow to Nexus.Compute");
-  connect(action3, &QAction::triggered, this, &MainWindow::sendToNexusCompute);
   QAction* action = menu.exec(QCursor::pos());
   if (!action) {
     return;
@@ -591,76 +590,6 @@ void MainWindow::sendToPython() {
     // Activate virtual environment and run Python script.
     qDebug() << "cmd.exe" << "/c" << batFileName << "&&" << "python" << pyFileName;
     QProcess::startDetached("cmd.exe", QStringList() << "/c" << batFileName << "&&" << "python" << pyFileName);
-  }
-  else {
-    // Run Python script.
-    qDebug() << "cmd.exe" << "/c" << "cd" << "python" << pyFileName;
-    QProcess::startDetached("cmd.exe", QStringList() << "/c" << "python" << pyFileName);
-  }
-}
-
-void MainWindow::sendToFormingSuite() {
-  // Regenerate script file.
-  generateScript(true);
-
-  // Check value of the environment variable.
-  QString dir = QDir(qgetenv("VMC_FS_PATH")).absolutePath();
-  if (dir.isEmpty()) {
-    qWarning("WARNING: Please set the VMC_FS_PATH environment variable.");
-    QMessageBox::warning(this, "Warning", "Please set the VMC_FS_PATH environment variable.");
-    return;
-  }
-
-  // Check RunScript.exe exists.
-  QString batFileName = QDir(dir).absoluteFilePath("RunScript.bat");
-  if (!QFileInfo(batFileName).exists()) {
-    qWarning("WARNING: RunScript.bat not found.");
-    QMessageBox::warning(this, "Warning", "RunScript.bat not found.");
-    return;
-  }
-
-  // Start detached process to run the script.
-  qDebug() << "cmd.exe" << "/c" << "cd" << dir << "&&" << batFileName << pyFileName;
-  QProcess::startDetached("cmd.exe", QStringList() << "/c" << "cd" << dir << "&&" << batFileName << pyFileName);
-}
-
-void MainWindow::sendToNexusCompute() {
-  // Regenerate script file.
-  generateScript(true);
-
-  // Get palette dir.
-  QString dir = palette->getDir();
-
-  // Check if virtual environment exists.
-  QString batFileName = QDir(dir).absoluteFilePath(".env/Scripts/activate.bat");
-
-  // Inform the user
-  QMessageBox::information(nullptr, QStringLiteral("Nexus Compute"), QStringLiteral("Job monitor will open when the file upload is completed."));
-
-  if (QFileInfo(batFileName).exists()) {
-    QProcess* process = new QProcess(this);
-    // Activate virtual environment and run Python script.
-    qDebug() << "cmd.exe" << "/c" << batFileName << "&&" << "python" << pyFileName;
-
-    connect(process, &QProcess::readyReadStandardOutput, [process, this]() {
-        QString output = process->readAllStandardOutput();
-        QString jobLink;
-
-        for (const QString& log : output.split('\n')) {
-            if (log.contains(QStringLiteral("https://"))) {
-                jobLink = log;
-                jobLink.replace(QStringLiteral("job submitted "), QStringLiteral("")).replace('\r', QStringLiteral("")).trimmed();
-                qDebug() << "job link: " << jobLink;
-                openLink(jobLink);
-            }
-        }
-        // Read the output (for debugging)
-        qDebug() << "Output:" << output;
-    });
-    connect(process, &QProcess::readyReadStandardError, [process]() {
-        qDebug() << "Error:" << process->readAllStandardError();
-    });
-    process->start("cmd.exe", QStringList() << "/c" << batFileName << "&&" << "python" << pyFileName);
   }
   else {
     // Run Python script.

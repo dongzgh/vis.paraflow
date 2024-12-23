@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Program",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/VMCWorkflow", // Adjust the path to your executable
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false,
+      "env": {},
+      "sourceLanguages": ["cpp"]
+    }
+  ]
+}

@@ -30,8 +30,6 @@ protected:
   void generateScript(bool silent = false);
   void runWorkflow();
   void sendToPython();
-  void sendToFormingSuite();
-  void sendToNexusCompute();
   void resizeEvent(QResizeEvent* event) override;
 
 public slots:
