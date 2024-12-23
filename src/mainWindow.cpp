@@ -89,6 +89,9 @@ void MainWindow::createToolBar() {
   // Create bar.
   QToolBar* bar = new QToolBar();
 
+  // Set icon size for actions.
+  bar->setIconSize(QSize(24, 24));
+
   // Add actions to the bar.
   acOpenPalette = bar->addAction(QIcon(":/icons/open-palette.png"), "");
   connect(acOpenPalette, &QAction::triggered, this, &MainWindow::openPalette);
@@ -104,9 +107,6 @@ void MainWindow::createToolBar() {
   connect(acGenerateScript, &QAction::triggered, this, &MainWindow::generateScript);
   acRunWorkflow = bar->addAction(QIcon(":/icons/run-workflow.png"), "");
   connect(acRunWorkflow, &QAction::triggered, this, &MainWindow::runWorkflow);
-
-  // Set icon size for actions.
-  bar->setIconSize(QSize(24, 24));
 
   // Set hints for actions.
   acOpenPalette->setToolTip("Open Palette");

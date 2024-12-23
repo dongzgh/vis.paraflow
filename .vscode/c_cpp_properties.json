@@ -1,17 +1,29 @@
 {
   "configurations": [
-      {
-          "name": "Mac",
-          "includePath": [
-              "${workspaceFolder}/**",
-              "/usr/local/opt/qt/include/**"
-          ],
-          "defines": [],
-          "compilerPath": "/usr/bin/clang",
-          "cStandard": "c11",
-          "cppStandard": "c++17",
-          "intelliSenseMode": "macos-clang-x64"
-      }
+    {
+      "name": "Windows",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:/Qt/6.5.1/msvc2019_64/include/**"
+      ],
+      "defines": [],
+      "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "msvc-x64"
+    },
+    {
+      "name": "macOS",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/usr/local/opt/qt/include/**"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "macos-clang-x64"
+    }
   ],
   "version": 4
 }
