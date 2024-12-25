@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(Windows) Launch",
+      "name": "(Win32) Launch",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/Debug/VMCWorkflow.exe",
+      "program": "${workspaceFolder}/build/debug/bin/VMCWorkflow.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
@@ -13,10 +13,10 @@
       "console": "externalTerminal"
     },
     {
-      "name": "(macOS) Launch",
+      "name": "(Mac) Launch",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/VMCWorkflow", // Adjust the path to your executable
+      "program": "${workspaceFolder}/build/debug/bin/VMCWorkflow", // Adjust the path to your executable
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopOnEntry": false,
