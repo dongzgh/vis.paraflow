@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent)
   setMinimumSize(800, 600);
 
   // Set window title.
-  setWindowTitle("VMC Workflow Modeler");
+  setWindowTitle("Workflow Modeler");
 
   // Set window icon.
   setWindowIcon(QIcon(":/icons/workflow.png"));

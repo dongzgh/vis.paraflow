@@ -5,7 +5,7 @@
       "name": "(Win32) Launch",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/VMCWorkflow.exe",
+      "program": "${workspaceFolder}/build/debug/bin/visflow.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${fileDirname}",
@@ -16,7 +16,7 @@
       "name": "(Mac) Launch",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/VMCWorkflow", // Adjust the path to your executable
+      "program": "${workspaceFolder}/build/debug/bin/visflow", // Adjust the path to your executable
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopOnEntry": false,
