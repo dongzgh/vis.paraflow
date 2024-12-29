@@ -9,8 +9,32 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: windows-latest
+  # build-windows:
+  #   runs-on: windows-latest
+
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
+
+  #     - name: Set up CMake
+  #       uses: lukka/get-cmake@latest
+
+  #     - name: Set up Qt
+  #       uses: jurplel/install-qt-action@v2
+  #       with:
+  #         version: '6.5.1'
+  #         host: 'windows'
+  #         target: 'desktop'
+  #         arch: 'win64_msvc2019_64'
+
+  #     - name: Configure CMake
+  #       run: cmake -S . -B build
+
+  #     - name: Build
+  #       run: cmake --build build
+
+  build-macos:
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -23,9 +47,9 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: '6.5.1'
-          host: 'windows'
+          host: 'macos'
           target: 'desktop'
-          arch: 'win64_msvc2019_64'
+          arch: 'clang_64'
 
       - name: Configure CMake
         run: cmake -S . -B build
