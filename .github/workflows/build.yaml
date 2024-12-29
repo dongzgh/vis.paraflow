@@ -47,7 +47,7 @@ jobs:
         uses: lukka/get-cmake@latest
 
       - name: Set up Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v4
         with:
           version: '6.5.1'
           host: 'macos'
