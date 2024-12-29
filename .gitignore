@@ -11,6 +11,9 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 
+# Visual Studio
+.vs/
+
 # Application specific
 .DS_Store
 build/
