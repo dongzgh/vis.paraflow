@@ -8,7 +8,7 @@
       "program": "${workspaceFolder}/build/debug/bin/visflow.exe",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${fileDirname}",
+      "cwd": "${workspaceFolder}",
       "environment": [],
       "console": "externalTerminal"
     },
