@@ -584,17 +584,41 @@ void MainWindow::sendToPython() {
   // Get palette dir.
   QString dir = palette->getDir();
 
+  // Start detached process to run the script.
+  QProcess process;
+#ifdef _WIN32
   // Check if virtual environment exists.
   QString batFileName = QDir(dir).absoluteFilePath(".env/Scripts/activate.bat");
   if (QFileInfo(batFileName).exists()) {
     // Activate virtual environment and run Python script.
     qDebug() << "cmd.exe" << "/c" << batFileName << "&&" << "python" << pyFileName;
-    QProcess::startDetached("cmd.exe", QStringList() << "/c" << batFileName << "&&" << "python" << pyFileName);
+    process.start("cmd.exe", QStringList() << "/c" << batFileName << "&&" << "python" << pyFileName);
   }
   else {
     // Run Python script.
-    qDebug() << "cmd.exe" << "/c" << "cd" << "python" << pyFileName;
-    QProcess::startDetached("cmd.exe", QStringList() << "/c" << "python" << pyFileName);
+    qDebug() << "cmd.exe" << "/c" << "&&" << "python" << pyFileName;
+    process.start("cmd.exe", QStringList() << "/c" << "&&" << "python" << pyFileName);
+  }
+#else
+  // Check if virtual environment exists.
+  QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
+  if (QFileInfo(shFileName).exists()) {
+    // Activate virtual environment and run Python script.
+    QString command = "source " + shFileName + " && " + "python " + pyFileName;
+    qDebug() << "bash -c " << command;
+    process.start("bash", QStringList() << "-c" << command);
+  }
+  else {
+    // Run Python script.
+    QString command = "python " + pyFileName;
+    qDebug() << command;
+    process.start("python", QStringList() << command);
+  }
+#endif
+  // Wait for the process to finish
+  if (!process.waitForFinished()) {
+      qDebug() << "Failed to execute command:" << process.errorString();
+      return;
   }
 }
 
