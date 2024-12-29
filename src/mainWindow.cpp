@@ -586,18 +586,22 @@ void MainWindow::sendToPython() {
 
   // Start detached process to run the script.
   QProcess process;
+  process.setWorkingDirectory(dir);
+
 #ifdef _WIN32
   // Check if virtual environment exists.
   QString batFileName = QDir(dir).absoluteFilePath(".env/Scripts/activate.bat");
   if (QFileInfo(batFileName).exists()) {
     // Activate virtual environment and run Python script.
-    qDebug() << "cmd.exe" << "/c" << batFileName << "&&" << "python" << pyFileName;
-    process.start("cmd.exe", QStringList() << "/c" << batFileName << "&&" << "python" << pyFileName);
+    QString command = batFileName + " && " + "python " + pyFileName;
+    qDebug() << "cmd.exe" << "/c" << command;
+    process.start("cmd.exe", QStringList() << "/c" << command);
   }
   else {
     // Run Python script.
-    qDebug() << "cmd.exe" << "/c" << "&&" << "python" << pyFileName;
-    process.start("cmd.exe", QStringList() << "/c" << "&&" << "python" << pyFileName);
+    QString command = "python " + pyFileName;
+    qDebug() << "cmd.exe /c " << command;
+    process.start("cmd.exe", QStringList() << "/c" << command);
   }
 #else
   // Check if virtual environment exists.
@@ -615,11 +619,9 @@ void MainWindow::sendToPython() {
     process.start("python", QStringList() << command);
   }
 #endif
-  // Wait for the process to finish
-  if (!process.waitForFinished()) {
-      qDebug() << "Failed to execute command:" << process.errorString();
-      return;
-  }
+
+  // Wait for the process to finish.
+  process.waitForFinished();
 }
 
 void MainWindow::slot_stackViewData() {
