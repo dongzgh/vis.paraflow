@@ -14,3 +14,4 @@ CMakeUserPresets.json
 # Application specific
 .DS_Store
 build/
+.env/
