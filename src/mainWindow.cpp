@@ -305,7 +305,14 @@ void MainWindow::generateScript(bool silent) {
       QProcess::startDetached("notepad", QStringList() << pyFileName);
     }
 #else
-    QProcess::startDetached("open", QStringList() << pyFileName);
+    // Check if TextEdit exists.
+    QString textEdit = "/System/Applications/TextEdit.app";
+    if (QFileInfo(textEdit).exists()) {
+      QProcess::startDetached("open", QStringList() << "-a" << textEdit << pyFileName);
+    }
+    else {  
+      QProcess::startDetached("open", QStringList() << pyFileName);
+    }
 #endif
   }
 }
