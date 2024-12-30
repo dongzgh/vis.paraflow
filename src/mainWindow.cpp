@@ -296,7 +296,14 @@ void MainWindow::generateScript(bool silent) {
   // Start detached process to open the script for editing.
   if (!silent) {
 #ifdef _WIN32
-    QProcess::startDetached("start", QStringList() << pyFileName);
+    // Check if notepad++ exists.
+    QString notepadPP = "C:/Program Files/Notepad++/notepad++.exe";
+    if (QFileInfo(notepadPP).exists()) {
+      QProcess::startDetached(notepadPP, QStringList() << pyFileName);
+    }
+    else {
+      QProcess::startDetached("notepad", QStringList() << pyFileName);
+    }
 #else
     QProcess::startDetached("open", QStringList() << pyFileName);
 #endif
