@@ -23,6 +23,18 @@
       "cStandard": "c11",
       "cppStandard": "c++17",
       "intelliSenseMode": "macos-clang-x64"
+    },
+    {
+      "name": "Linux",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "/opt/Qt/6.8.1/gcc_64/include/**"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
     }
   ],
   "version": 4

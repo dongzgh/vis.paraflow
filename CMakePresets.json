@@ -54,6 +54,33 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
+    },
+    {
+      "hidden": true,
+      "name": "(Linux) Qt",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/gcc_64"
+      }
+    },
+    {
+      "name": "(Linux) Debug",
+      "inherits": "(Linux) Qt",
+      "description": "Build with debug information",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "(Linux) Release",
+      "inherits": "(Linux) Qt",
+      "description": "Build with release optimization",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
     }
   ]
 }

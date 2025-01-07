@@ -22,6 +22,15 @@
       "stopOnEntry": false,
       "env": {},
       "sourceLanguages": ["cpp"]
+    },
+    {
+      "name": "(Linux) Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/bin/visflow",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
