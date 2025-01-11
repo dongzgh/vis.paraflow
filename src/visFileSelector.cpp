@@ -43,6 +43,10 @@ void visFileSelector::updateFolderText()
     nullptr, QStringLiteral("Select Directory"), QStringLiteral(""),
     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
+  // Convert folder path relative to the project path.
+  folderPath = QDir::current().relativeFilePath(folderPath);
+  
+  // Set the lineEdit text.
   if (!folderPath.isEmpty()) {
     lineEdit->setText(folderPath);
   }
@@ -51,6 +55,11 @@ void visFileSelector::updateFolderText()
 void visFileSelector::updateFileText() {
   // Open a file dialog and set the selected file path to the lineEdit text.
   QString filePath = QFileDialog::getOpenFileName(nullptr, title, dir, filter);
+
+  // Convert file path relative to the project path.
+  filePath = QDir(QDir::currentPath()).relativeFilePath(filePath);
+
+  // Set the lineEdit text.
   if (!filePath.isEmpty()) {
     lineEdit->setText(filePath);
   }

@@ -545,6 +545,11 @@ void visMainWindow::replaceEditData(const QWidget* edit, QString& tplData) {
   else if (visFileSelector* fileSelector = qobject_cast<visFileSelector*>(const_cast<QWidget*>(edit))) {
     // Get edit data.
     editData = fileSelector->text();
+
+    // Convert relative path to absolute path.
+    if (!editData.isEmpty() && !editData.startsWith("/")) {
+      editData = QDir::current().absoluteFilePath(editData);
+    }
   }
   else if (QLineEdit* lineEdit = qobject_cast<QLineEdit*>(const_cast<QWidget*>(edit))) {
     // Get edit data.

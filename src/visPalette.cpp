@@ -10,6 +10,7 @@
 #include <QJsonArray>
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QDir>
 
 visPalette::visPalette(QWidget* parent)
   : QWidget(parent), layout(new QVBoxLayout(this)), toolBox(new QToolBox()) {
@@ -113,6 +114,9 @@ void visPalette::openFile(const QString& fileName) {
 
   // Get directory of the JSON file.
   dir = QFileInfo(fileName).absolutePath();
+
+  // Set current dir to the JSON file directory.
+  QDir::setCurrent(dir);
 
   // Read the JSON file and find 'include' array.
   QByteArray data = file.readAll();
