@@ -4,7 +4,7 @@
 #include "include/visConnector.h"
 #include "include/visLink.h"
 #include "include/visFileSelector.h"
-#include "include/mainWindow.h"
+#include "include/visMainWindow.h"
 #include <QGraphicsProxyWidget>
 #include <QGraphicsSceneMouseEvent>
 
@@ -96,7 +96,7 @@ visNode* visScene::addNode(const QJsonObject& nodeDef, QPointF pos) {
   connect(node, &visNode::signal_nodeMoved, this, &visScene::slot_update);
 
   // Connect the signal showInfo signal to the slot_showInfo slot.
-  connect(node, &visNode::signal_showInfo, static_cast<MainWindow*>(parent()), &MainWindow::slot_showInfo);
+  connect(node, &visNode::signal_showInfo, static_cast<visMainWindow*>(parent()), &visMainWindow::slot_showInfo);
 
   // Set a lower z-value for nodes.
   node->setZValue(0);

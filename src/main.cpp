@@ -1,4 +1,4 @@
-#include "include/mainWindow.h"
+#include "include/visMainWindow.h"
 #include <QApplication>
 
 int main(int argc, char* argv[]) {
@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
   a.setWindowIcon(QIcon(":/icons/workflow.ico"));
 
   // Create main window.
-  MainWindow w;
+  visMainWindow w;
   w.show();
 
   // Return application.

@@ -1,4 +1,4 @@
-#include "include/mainWindow.h"
+#include "include/visMainWindow.h"
 #include "include/visView.h"
 #include "include/visScene.h"
 #include "include/visNode.h"
@@ -19,7 +19,7 @@
 #include <QLabel>
 #include <QDesktopServices>
 
-MainWindow::MainWindow(QWidget* parent)
+visMainWindow::visMainWindow(QWidget* parent)
   : QMainWindow(parent), scene(new visScene(this)), view(new visView(scene, this)) {
 
   // Set window minimum size.
@@ -48,20 +48,20 @@ MainWindow::MainWindow(QWidget* parent)
   int height = this->height();
 
   // Connect signals and slots.
-  connect(palette, &visPalette::signal_stackViewData, this, &MainWindow::slot_stackViewData);
+  connect(palette, &visPalette::signal_stackViewData, this, &visMainWindow::slot_stackViewData);
   connect(palette, &visPalette::signal_nodeButtonClicked, view, &visView::slot_nodeButtonClicked);
-  connect(scene, &visScene::signal_stackViewData, this, &MainWindow::slot_stackViewData);
+  connect(scene, &visScene::signal_stackViewData, this, &visMainWindow::slot_stackViewData);
 
   // Create a QTimer to periodically check the function and update the action's status
   QTimer* timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this, &MainWindow::updateActionStatus);
+  connect(timer, &QTimer::timeout, this, &visMainWindow::updateActionStatus);
   timer->start(1000); // Check every second
 }
 
-MainWindow::~MainWindow() {
+visMainWindow::~visMainWindow() {
 }
 
-void MainWindow::updateActionStatus() {
+void visMainWindow::updateActionStatus() {
   acNewWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
   acOpenWorkflow->setEnabled(!palette->isEmpty());
   acSaveWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
@@ -70,7 +70,7 @@ void MainWindow::updateActionStatus() {
   acRunWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
 }
 
-void MainWindow::createToolBar() {
+void visMainWindow::createToolBar() {
   // Create a container widget.
   toolbar = new QWidget(this);
 
@@ -94,19 +94,19 @@ void MainWindow::createToolBar() {
 
   // Add actions to the bar.
   acOpenPalette = bar->addAction(QIcon(":/icons/open-palette.png"), "");
-  connect(acOpenPalette, &QAction::triggered, this, &MainWindow::openPalette);
+  connect(acOpenPalette, &QAction::triggered, this, &visMainWindow::openPalette);
   acNewWorkflow = bar->addAction(QIcon(":/icons/new-workflow.png"), "");
-  connect(acNewWorkflow, &QAction::triggered, this, &MainWindow::newWorkflow);
+  connect(acNewWorkflow, &QAction::triggered, this, &visMainWindow::newWorkflow);
   acOpenWorkflow = bar->addAction(QIcon(":/icons/open-workflow.png"), "");
-  connect(acOpenWorkflow, &QAction::triggered, this, &MainWindow::openWorkflow);
+  connect(acOpenWorkflow, &QAction::triggered, this, &visMainWindow::openWorkflow);
   acSaveWorkflow = bar->addAction(QIcon(":/icons/save-workflow.png"), "");
-  connect(acSaveWorkflow, &QAction::triggered, this, &MainWindow::saveWorkflow);
+  connect(acSaveWorkflow, &QAction::triggered, this, &visMainWindow::saveWorkflow);
   acUndoWorkflow = bar->addAction(QIcon(":/icons/undo-workflow.png"), "");
-  connect(acUndoWorkflow, &QAction::triggered, this, &MainWindow::undoWorkflow);
+  connect(acUndoWorkflow, &QAction::triggered, this, &visMainWindow::undoWorkflow);
   acGenerateScript = bar->addAction(QIcon(":/icons/generate-script.png"), "");
-  connect(acGenerateScript, &QAction::triggered, this, &MainWindow::generateScript);
+  connect(acGenerateScript, &QAction::triggered, this, &visMainWindow::generateScript);
   acRunWorkflow = bar->addAction(QIcon(":/icons/run-workflow.png"), "");
-  connect(acRunWorkflow, &QAction::triggered, this, &MainWindow::runWorkflow);
+  connect(acRunWorkflow, &QAction::triggered, this, &visMainWindow::runWorkflow);
 
   // Set hints for actions.
   acOpenPalette->setToolTip("Open Palette");
@@ -153,11 +153,11 @@ void MainWindow::createToolBar() {
   toolbar->setFixedWidth(buttonSize * bar->actions().size());
   toolbar->setFixedHeight(buttonSize);
 
-  // Move toolbar to the top of the MainWindow.
+  // Move toolbar to the top of the visMainWindow.
   toolbar->move(spacing - 3, spacing);
 }
 
-void MainWindow::createPalette() {
+void visMainWindow::createPalette() {
   // Create palette.
   palette = new visPalette(this);
 
@@ -165,7 +165,7 @@ void MainWindow::createPalette() {
   palette->move(spacing, spacing * 3 + buttonSize);
 }
 
-void MainWindow::createInfoPane() {
+void visMainWindow::createInfoPane() {
   // Create a container widget.
   infoPane = new QLabel("", this);
 
@@ -186,7 +186,7 @@ void MainWindow::createInfoPane() {
   infoPane->setTextFormat(Qt::RichText);
 }
 
-void MainWindow::openPalette() { 
+void visMainWindow::openPalette() { 
   // Open palette file.
   QString fileName = QFileDialog::getOpenFileName(this, "Open Palette", "", "Palette Files (*.json)");
   if (!fileName.isEmpty()) {
@@ -203,7 +203,7 @@ void MainWindow::openPalette() {
   }
 }
 
-void MainWindow::newWorkflow() {
+void visMainWindow::newWorkflow() {
   // Clear the scene.
   scene->clear();
 
@@ -222,7 +222,7 @@ void MainWindow::newWorkflow() {
   view->update();
 }
 
-void MainWindow::openWorkflow() {
+void visMainWindow::openWorkflow() {
   // Open workflow file.
   QString fileName = QFileDialog::getOpenFileName(this, "Open Scene", "", "Scene Files (*.wf)");
   if (!fileName.isEmpty()) {
@@ -240,7 +240,7 @@ void MainWindow::openWorkflow() {
   QApplication::processEvents();
 }
 
-void MainWindow::saveWorkflow() {
+void visMainWindow::saveWorkflow() {
   // Save workflow file.
   QString fileName = QFileDialog::getSaveFileName(this, "Save Scene", "", "Scene Files (*.wf)");
   if (!fileName.isEmpty()) {
@@ -254,7 +254,7 @@ void MainWindow::saveWorkflow() {
   QApplication::processEvents();
 }
 
-void MainWindow::generateScript(bool silent) {
+void visMainWindow::generateScript(bool silent) {
   // Get nodes.
   QList<visNode*>& nodes = scene->getNodes();
 
@@ -317,7 +317,7 @@ void MainWindow::generateScript(bool silent) {
   }
 }
 
-QList<int> MainWindow::generateSequence(int rootIndex, const QList<visNode*>& nodes) {
+QList<int> visMainWindow::generateSequence(int rootIndex, const QList<visNode*>& nodes) {
   QHash<visNode*, int> inDegree;
   QQueue<int> readyIndices;
   QList<int> sequence;
@@ -353,7 +353,7 @@ QList<int> MainWindow::generateSequence(int rootIndex, const QList<visNode*>& no
   return sequence;
 }
 
-QString MainWindow::generateCode(const QList<int>& sequence, const QList<visNode*>& nodes) {
+QString visMainWindow::generateCode(const QList<int>& sequence, const QList<visNode*>& nodes) {
   // Prepare return code.
   QString code;
 
@@ -422,7 +422,7 @@ QString MainWindow::generateCode(const QList<int>& sequence, const QList<visNode
   return code;
 }
 
-void MainWindow::extractImports(QString& tplData, QStringList& imports) {
+void visMainWindow::extractImports(QString& tplData, QStringList& imports) {
   // Iterate each line in template data.
   QStringList lines = tplData.split("\n");
   QStringList newLines;
@@ -450,7 +450,7 @@ void MainWindow::extractImports(QString& tplData, QStringList& imports) {
   tplData = tplData.trimmed();
 }
 
-void MainWindow::replaceConnectedEditData(const visConnector* connector, QString& tplData) {
+void visMainWindow::replaceConnectedEditData(const visConnector* connector, QString& tplData) {
   // Get start node of the connector.
   visNode* startNode = connector->getStartNode();
 
@@ -503,7 +503,7 @@ void MainWindow::replaceConnectedEditData(const visConnector* connector, QString
   tplData = tplData.replace(QRegularExpression("\\b" + inVarName + "\\b"), outVarName);
 }
 
-void MainWindow::replaceEditData(const QWidget* edit, QString& tplData) {
+void visMainWindow::replaceEditData(const QWidget* edit, QString& tplData) {
   // Get edit data type.
   visNode::DataType dataType = (visNode::DataType)edit->property("DataType").toInt();
   if (dataType == visNode::DataType::Object) {
@@ -561,7 +561,7 @@ void MainWindow::replaceEditData(const QWidget* edit, QString& tplData) {
   tplData = tplData.replace(QRegularExpression("\\b" + varName + "\\b"), editData);
 }
 
-void MainWindow::replaceEditsData(const visNode* node, QString& tplData) {
+void visMainWindow::replaceEditsData(const visNode* node, QString& tplData) {
   // Get node edits.
   QList<QWidget*> edits = node->getEdits();
 
@@ -584,18 +584,18 @@ void MainWindow::replaceEditsData(const visNode* node, QString& tplData) {
   }
 }
 
-void MainWindow::runWorkflow() {
+void visMainWindow::runWorkflow() {
   // Define popup menu.
   QMenu menu;
   QAction* action1 = menu.addAction("Send Workflow to Python");
-  connect(action1, &QAction::triggered, this, &MainWindow::sendToPython);
+  connect(action1, &QAction::triggered, this, &visMainWindow::sendToPython);
   QAction* action = menu.exec(QCursor::pos());
   if (!action) {
     return;
   }
 }
 
-void MainWindow::sendToPython() {
+void visMainWindow::sendToPython() {
   // Regenerate script file.
   generateScript(true);
 
@@ -642,7 +642,7 @@ void MainWindow::sendToPython() {
   process.waitForFinished();
 }
 
-void MainWindow::slot_stackViewData() {
+void visMainWindow::slot_stackViewData() {
   // Serialize the current view.
   QByteArray viewData;
   view->serialize(viewData);
@@ -658,7 +658,7 @@ void MainWindow::slot_stackViewData() {
     viewDataStack.push_back(viewData);
 }
 
-void MainWindow::slot_showInfo(const visNode* node) {
+void visMainWindow::slot_showInfo(const visNode* node) {
   QString info =
     "<style>"
     "h3 { font-size: 18px; margin: 10px 0; color: rgba(250, 226, 83, 1.0); }"
@@ -751,7 +751,7 @@ void MainWindow::slot_showInfo(const visNode* node) {
   }
 }
 
-void MainWindow::undoWorkflow() {
+void visMainWindow::undoWorkflow() {
   // New a workflow.
   newWorkflow();
 
@@ -766,7 +766,7 @@ void MainWindow::undoWorkflow() {
   QApplication::processEvents();
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event) {
+void visMainWindow::resizeEvent(QResizeEvent* event) {
   // Call the base class implementation
   QMainWindow::resizeEvent(event);
 
@@ -778,7 +778,7 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
   infoPane->move(newWidth - infoPaneWidth - spacing * 3, spacing + 3);
 }
 
-void MainWindow::openLink(QString &url)
+void visMainWindow::openLink(QString &url)
 {
     QDesktopServices::openUrl(QUrl(url));
 }

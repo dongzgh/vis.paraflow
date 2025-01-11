@@ -10,12 +10,12 @@
 #include <QGraphicsView>
 #include <QLabel>
 
-class MainWindow : public QMainWindow {
+class visMainWindow : public QMainWindow {
   Q_OBJECT
 
 public:
-  MainWindow(QWidget* parent = nullptr);
-  ~MainWindow();
+  visMainWindow(QWidget* parent = nullptr);
+  ~visMainWindow();
 
 protected:
   void updateActionStatus();
