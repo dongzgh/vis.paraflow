@@ -8,20 +8,16 @@
       "program": "${workspaceFolder}/build/debug/bin/visflow.exe",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
-      "environment": [],
-      "console": "externalTerminal"
+      "cwd": "${workspaceFolder}"
     },
     {
       "name": "(Mac) Launch",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/visflow", // Adjust the path to your executable
+      "program": "${workspaceFolder}/build/debug/bin/visflow",
       "args": [],
-      "cwd": "${workspaceFolder}",
       "stopOnEntry": false,
-      "env": {},
-      "sourceLanguages": ["cpp"]
+      "cwd": "${workspaceFolder}"
     },
     {
       "name": "(Linux) Launch",
