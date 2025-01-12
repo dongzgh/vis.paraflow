@@ -340,14 +340,22 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
   // Set no pen.
   painter->setPen(Qt::NoPen);
 
-  // Draw edit box hot areas.
+  // Draw the QLineEdit items first.
   int yOffset = titleHeight + spacing;
+  for (int i = 0; i < edits.size(); ++i) {
+    // Assuming edits[i] is a QLineEdit or similar widget
+    edits[i]->render(painter, QPoint(spacing, yOffset));
+    yOffset += editHeight + spacing;
+  }
+
+  // Draw edit box hot areas.
+  yOffset = titleHeight + spacing;
   for (int i = 0; i < edits.size(); ++i) {
     if (i == 0) {
       // Draw for the in hidden edit box.
       QRectF inputHotRect(spacing / 2, 0, spacing / 2, titleHeight);      
       hotRects.append(inputHotRect);
-      QRectF drawRect(spacing / 2, 0, editHeight, editHeight);
+      QRectF drawRect(spacing / 2, 0, titleHeight, titleHeight);
       painter->setBrush(inputColor);
       painter->drawRect(drawRect);
     }    
@@ -355,7 +363,7 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
       // Draw for the out hidden edit box.
       QRectF outputHotRect(boundingRect().width() - spacing, 0, spacing / 2, titleHeight);      
       hotRects.append(outputHotRect);
-      QRectF drawRect(boundingRect().width() - spacing / 2 - editHeight, 0, editHeight, editHeight);
+      QRectF drawRect(boundingRect().width() - spacing / 2 - titleHeight, 0, titleHeight, titleHeight);
       painter->setBrush(outputColor);
       painter->drawRect(drawRect);
     }
