@@ -340,32 +340,22 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
   // Set no pen.
   painter->setPen(Qt::NoPen);
 
-  // Draw the QLineEdit items first.
-  int yOffset = titleHeight + spacing;
-  for (int i = 0; i < edits.size(); ++i) {
-    // Assuming edits[i] is a QLineEdit or similar widget
-    edits[i]->render(painter, QPoint(spacing, yOffset));
-    yOffset += editHeight + spacing;
-  }
-
   // Draw edit box hot areas.
-  yOffset = titleHeight + spacing;
+  int yOffset = titleHeight + spacing;
   for (int i = 0; i < edits.size(); ++i) {
     if (i == 0) {
       // Draw for the in hidden edit box.
       QRectF inputHotRect(spacing / 2, 0, spacing / 2, titleHeight);      
       hotRects.append(inputHotRect);
-      QRectF drawRect(spacing / 2, 0, titleHeight, titleHeight);
       painter->setBrush(inputColor);
-      painter->drawRect(drawRect);
+      painter->drawRect(inputHotRect);
     }    
     else if (i == 1) {
       // Draw for the out hidden edit box.
       QRectF outputHotRect(boundingRect().width() - spacing, 0, spacing / 2, titleHeight);      
       hotRects.append(outputHotRect);
-      QRectF drawRect(boundingRect().width() - spacing / 2 - titleHeight, 0, titleHeight, titleHeight);
       painter->setBrush(outputColor);
-      painter->drawRect(drawRect);
+      painter->drawRect(outputHotRect);
     }
     else
     {
@@ -374,17 +364,15 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
         // Draw input hot area.
         QRectF inputHotRect(spacing / 2, yOffset, spacing / 2, editHeight);        
         hotRects.append(inputHotRect);
-        QRectF drawRect(spacing / 2, yOffset, editHeight, editHeight);
         painter->setBrush(inputColor);
-        painter->drawRect(drawRect);
+        painter->drawRect(inputHotRect);
       }
       else if (edits[i]->property("EditType").toInt() == EditType::Out) {
         // Draw output hot area.
         QRectF outputHotRect(boundingRect().width() - spacing, yOffset, spacing / 2, editHeight);        
         hotRects.append(outputHotRect);
-        QRectF drawRect(boundingRect().width() - spacing / 2 - editHeight, yOffset, editHeight, editHeight);
         painter->setBrush(outputColor);
-        painter->drawRect(drawRect);
+        painter->drawRect(outputHotRect);
       }
 
       // Increment y offset.
