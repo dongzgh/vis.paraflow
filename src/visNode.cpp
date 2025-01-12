@@ -265,7 +265,13 @@ void visNode::addEdit(QJsonObject parameter) {
     }
 
     // Set edit box without border.
-    edit->setStyleSheet("QLineEdit { border: 0px; }");
+    edit->setStyleSheet(
+      "QLineEdit { "
+      "border: 0px;"
+      "background-color: rgb(255, 255, 255);"
+      "color: rgb(0, 0, 0);"
+      "}"
+    );
 
     // Disable edit box if DataType is Object.
     if (dataType == DataType::Object) {
@@ -274,8 +280,8 @@ void visNode::addEdit(QJsonObject parameter) {
       // Set read-only style.
       edit->setStyleSheet(
         "QLineEdit {"
-        "background-color: lightgray;"
-        "color: black;"
+        "background-color: rgb(200, 200, 200);"
+        "color: rgb(0, 0, 0);"
         "border: 0px;"
         "}"
       );
@@ -288,8 +294,8 @@ void visNode::addEdit(QJsonObject parameter) {
       // Set read-only style.
       edit->setStyleSheet(
         "QLineEdit {"
-        "background-color: lightgray;"
-        "color: black;"
+        "background-color: rgb(200, 200, 200);"
+        "color: rgb(0, 0, 0);"
         "border: 0px;"
         "}"
       );

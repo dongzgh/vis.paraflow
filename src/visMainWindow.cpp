@@ -139,7 +139,7 @@ void visMainWindow::createToolBar() {
     "background-color: rgba(0, 0, 0, 0.5);"
     "}"
     "QToolButton::hover {"
-    "background-color: rgba(250, 226, 83, 1.0);"
+    "background-color: rgb(250, 226, 83, 0.5);"
     "}"
   );
 
@@ -666,10 +666,10 @@ void visMainWindow::slot_stackViewData() {
 void visMainWindow::slot_showInfo(const visNode* node) {
   QString info =
     "<style>"
-    "h3 { font-size: 18px; margin: 10px 0; color: rgba(250, 226, 83, 1.0); }"
-    "h4 { font-size: 16px; margin: 8px 0; color: rgba(0, 255, 0, 1.0); }"
-    "p  { font-size: 14px; margin: 5px 0; color: white; }"
-    "span  { font-size: 14px; font-style: italic; font-weight: bold; margin: 5px 0; color: white; }"
+    "h3 { font-size: 18px; margin: 10px 0; color: rgb(250, 226, 83); }"
+    "h4 { font-size: 16px; margin: 8px 0; color: rgb(0, 255, 0); }"
+    "p  { font-size: 14px; margin: 5px 0; color: rgb(255, 255, 255); }"
+    "span  { font-size: 14px; font-style: italic; font-weight: bold; margin: 5px 0; color: rgb(255, 255, 255); }"
     "</style>";
 
   // Check if node is null.
