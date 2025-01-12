@@ -295,7 +295,7 @@ void visMainWindow::generateScript(bool silent) {
 
   // Start detached process to open the script for editing.
   if (!silent) {
-#ifdef _WIN32
+#if defined(_WIN32)
     // Check if notepad++ exists.
     QString notepadPP = "C:/Program Files/Notepad++/notepad++.exe";
     if (QFileInfo(notepadPP).exists()) {
@@ -304,7 +304,7 @@ void visMainWindow::generateScript(bool silent) {
     else {
       QProcess::startDetached("notepad", QStringList() << pyFileName);
     }
-#else
+#elif defined(__APPLE__)
     // Check if TextEdit exists.
     QString textEdit = "/System/Applications/TextEdit.app";
     if (QFileInfo(textEdit).exists()) {
@@ -312,6 +312,15 @@ void visMainWindow::generateScript(bool silent) {
     }
     else {  
       QProcess::startDetached("open", QStringList() << pyFileName);
+    }
+#elif defined(__linux__)
+    // Check if gedit exists.
+    QString gedit = "/usr/bin/gedit";
+    if (QFileInfo(gedit).exists()) {
+      QProcess::startDetached(gedit, QStringList() << pyFileName);
+    }
+    else {
+      QProcess::startDetached("nano", QStringList() << pyFileName);
     }
 #endif
   }
@@ -611,7 +620,7 @@ void visMainWindow::sendToPython() {
   QProcess process;
   process.setWorkingDirectory(dir);
 
-#ifdef _WIN32
+#if defined(_WIN32)
   // Check if virtual environment exists.
   QString batFileName = QDir(dir).absoluteFilePath(".env/Scripts/activate.bat");
   if (QFileInfo(batFileName).exists()) {
@@ -626,7 +635,7 @@ void visMainWindow::sendToPython() {
     qDebug() << "cmd.exe /c " << command;
     process.start("cmd.exe", QStringList() << "/c" << command);
   }
-#else
+#elif defined(__APPLE__)
   // Check if virtual environment exists.
   QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
   if (QFileInfo(shFileName).exists()) {
@@ -640,6 +649,21 @@ void visMainWindow::sendToPython() {
     QString command = "python " + pyFileName;
     qDebug() << command;
     process.start("python", QStringList() << command);
+  }
+#elif defined(__linux__)
+  // Check if virtual environment exists.
+  QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
+  if (QFileInfo(shFileName).exists()) {
+    // Activate virtual environment and run Python script.
+    QString command = "source " + shFileName + " && " + "python3 " + pyFileName;
+    qDebug() << "bash -c " << command;
+    process.start("bash", QStringList() << "-c" << command);
+  }
+  else {
+    // Run Python script.
+    QString command = "python3 " + pyFileName;
+    qDebug() << command;
+    process.start("python3", QStringList() << command);
   }
 #endif
 
