@@ -183,7 +183,7 @@ void visNode::addEdit(QJsonObject parameter) {
   }
   else if (file) {
     // Create a visFileSelector.
-    visFileSelector* edit = new visFileSelector(nullptr);
+    visFileSelector* edit = new visFileSelector();
     edit->setPlaceholderText(name);
     edit->setToolTip(name);
 
@@ -253,6 +253,7 @@ void visNode::addEdit(QJsonObject parameter) {
   {
     // Create a QLineEdit.
     QLineEdit* edit = new QLineEdit();
+    int height = edit->height();
     edit->setPlaceholderText(name);
     edit->setToolTip(name);
 
@@ -273,7 +274,7 @@ void visNode::addEdit(QJsonObject parameter) {
       "}"
     );
 
-    // Disable edit box if DataType is Object.
+    // Disable edit box if it is an object.
     if (dataType == DataType::Object) {
       edit->setReadOnly(true);
 

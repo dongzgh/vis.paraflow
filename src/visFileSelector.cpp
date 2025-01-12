@@ -1,36 +1,46 @@
 #include "include/visFileSelector.h"
+#include "include/visNode.h"
 #include <QHBoxLayout>
 #include <QFileDialog>
 
 visFileSelector::visFileSelector(QWidget* parent, bool isFolder) : QWidget(parent) {
   // Create the QLineEdit
-  lineEdit = new QLineEdit(this);
+  edit = new QLineEdit(this);
+
+  // Set the width and height of the QLineEdit.
+  edit->setMinimumWidth(visNode::editWidth - visNode::editHeight);
+  edit->setMinimumHeight(visNode::editHeight);
 
   // Create the QPushButton
   button = new QPushButton(this);
   button->setText("..."); // Set button text or icon
-  button->setFixedSize(lineEdit->height(), lineEdit->height()); // Make the button square and same height as QLineEdit
+
+  // Set button without border.
+  button->setStyleSheet(
+    "QPushButton {"
+    "border: 0px;"
+    "background-color: rgb(200, 200, 200)"
+    "}"
+  );
+
+  // Set button width and height.
+  button->setMinimumWidth(visNode::editHeight);
+  button->setMinimumHeight(visNode::editHeight);
 
   // Create the layout and add widgets
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0); // Remove margins
   layout->setSpacing(0); // Remove spacing between widgets
-  layout->addWidget(lineEdit);
+  layout->addWidget(edit);
   layout->addWidget(button);
 
   // Set the layout to the widget
   setLayout(layout);
 
   // Set line edit without border.
-  lineEdit->setStyleSheet("QLineEdit { border: 0px; }");
+  edit->setStyleSheet("QLineEdit { border: 0px; }");
 
-  // Set button without border.
-  button->setStyleSheet("QPushButton { border: 0px; }");
-
-  // Set button height.
-  button->setFixedHeight(lineEdit->height() / 2);
-
-  // Connect button clicked signal to update lineEdit text.
+  // Connect button clicked signal to update edit text.
   if (isFolder)
     connect(button, &QPushButton::clicked, this, &visFileSelector::updateFolderText);
   else
@@ -46,22 +56,22 @@ void visFileSelector::updateFolderText()
   // Convert folder path relative to the project path.
   folderPath = QDir::current().relativeFilePath(folderPath);
   
-  // Set the lineEdit text.
+  // Set the edit text.
   if (!folderPath.isEmpty()) {
-    lineEdit->setText(folderPath);
+    edit->setText(folderPath);
   }
 }
 
 void visFileSelector::updateFileText() {
-  // Open a file dialog and set the selected file path to the lineEdit text.
+  // Open a file dialog and set the selected file path to the edit text.
   QString filePath = QFileDialog::getOpenFileName(nullptr, title, dir, filter);
 
   // Convert file path relative to the project path.
   filePath = QDir(QDir::currentPath()).relativeFilePath(filePath);
 
-  // Set the lineEdit text.
+  // Set the edit text.
   if (!filePath.isEmpty()) {
-    lineEdit->setText(filePath);
+    edit->setText(filePath);
   }
 }
 

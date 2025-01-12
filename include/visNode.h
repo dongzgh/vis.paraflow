@@ -45,6 +45,8 @@ private:
 public:
   QString id;
   QList<visNode*> nextNodes;
+  static const int editHeight{ 20 };
+  static const int editWidth{ 200 };
   
 protected:
   QColor inputColor{ 70, 240, 3 };
@@ -53,8 +55,6 @@ protected:
 private:
   QJsonObject nodeDef;
   int titleHeight{ 30 };
-  int editHeight{ 20 };
-  int editWidth{ 200 };
   int spacing{ 10 };
   QWidget* container = nullptr;
   QVBoxLayout* layout = nullptr;

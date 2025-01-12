@@ -12,7 +12,7 @@ visScene::visScene(QObject* parent)
   : QGraphicsScene(parent) {
   setSceneRect(0, 0, 10000, 10000);
 
-  // Set scene background to dark gray.
+  // Set scene background color.
   setBackgroundBrush(QColor(50, 50, 50));
 
   //// Set background texture.

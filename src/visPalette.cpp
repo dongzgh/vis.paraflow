@@ -79,7 +79,7 @@ void visPalette::setToolBoxStyle() {
     "}"
     "QToolBox::tab {"
     "background-color: rgb(250, 226, 83);"
-    "color: black;"
+    "color: rgb(0, 0, 0);"
     "text-transform: uppercase;"
     "font-weight: bold;"
     "}"
