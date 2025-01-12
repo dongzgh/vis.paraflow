@@ -5,7 +5,7 @@
       "name": "(Win32) Launch",
       "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/visflow.exe",
+      "program": "${workspaceFolder}/build/debug/bin/visProcess.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}"
@@ -14,7 +14,7 @@
       "name": "(Mac) Launch",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/visflow",
+      "program": "${workspaceFolder}/build/debug/bin/visProcess",
       "args": [],
       "stopOnEntry": false,
       "cwd": "${workspaceFolder}"
@@ -23,7 +23,7 @@
       "name": "(Linux) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/visflow",
+      "program": "${workspaceFolder}/build/debug/bin/visProcess",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}"
