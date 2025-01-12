@@ -32,7 +32,7 @@
       "hidden": true,
       "name": "(Windows) Qt",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "C:/Qt/6.5.1/msvc2019_64"
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.8.1/msvc2022_64"
       }
     },
     {
