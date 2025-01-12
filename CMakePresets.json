@@ -5,7 +5,7 @@
       "hidden": true,
       "name": "(macOS) Qt",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "/usr/local/opt/qt"
+        "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/macos"
       }
     },
     {
