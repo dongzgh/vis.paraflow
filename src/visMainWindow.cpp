@@ -139,7 +139,7 @@ void visMainWindow::createToolBar() {
     "background-color: rgba(0, 0, 0, 0.5);"
     "}"
     "QToolButton::hover {"
-    "background-color: rgb(250, 226, 83, 0.5);"
+    "background-color: rgba(250, 226, 83, 0.5);"
     "}"
   );
 
