@@ -78,7 +78,7 @@ visNode::visNode(const QJsonObject& nodeDef) : nodeDef(nodeDef) {
 }
 
 void visNode::addTitleEdit(EditType editType) {
-  // Create a QLineEdit.
+  // Create a QLineEdit. 
   QWidget* edit = new QWidget();
 
   // Set edit box width.
@@ -230,6 +230,10 @@ void visNode::addEdit(QJsonObject parameter) {
     // Set edit box width and height.
     edit->setMinimumWidth(editWidth);
     edit->setMinimumHeight(editHeight);
+
+    // Set edit title.
+    edit->setTitle(title);
+    edit->setDir(QDir::currentPath());
 
     // Set data for the edit box.
     edit->setProperty("EditType", editType);
