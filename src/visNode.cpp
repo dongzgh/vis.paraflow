@@ -337,7 +337,7 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
       hotRects.append(inputHotRect);
       QRectF drawRect(spacing / 2, 0, editHeight, editHeight);
       painter->setBrush(inputColor);
-      painter->drawEllipse(drawRect);
+      painter->drawRect(drawRect);
     }    
     else if (i == 1) {
       // Draw for the out hidden edit box.
@@ -345,7 +345,7 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
       hotRects.append(outputHotRect);
       QRectF drawRect(boundingRect().width() - spacing / 2 - editHeight, 0, editHeight, editHeight);
       painter->setBrush(outputColor);
-      painter->drawEllipse(drawRect);
+      painter->drawRect(drawRect);
     }
     else
     {
@@ -356,7 +356,7 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
         hotRects.append(inputHotRect);
         QRectF drawRect(spacing / 2, yOffset, editHeight, editHeight);
         painter->setBrush(inputColor);
-        painter->drawEllipse(drawRect);
+        painter->drawRect(drawRect);
       }
       else if (edits[i]->property("EditType").toInt() == EditType::Out) {
         // Draw output hot area.
@@ -364,7 +364,7 @@ void visNode::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, Q
         hotRects.append(outputHotRect);
         QRectF drawRect(boundingRect().width() - spacing / 2 - editHeight, yOffset, editHeight, editHeight);
         painter->setBrush(outputColor);
-        painter->drawEllipse(drawRect);
+        painter->drawRect(drawRect);
       }
 
       // Increment y offset.
