@@ -21,6 +21,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QToolTip>
+#include <QDir>
 
 visNode::visNode(const QJsonObject& nodeDef) : nodeDef(nodeDef) {
   // Set id using GUID.
@@ -197,7 +198,7 @@ void visNode::addEdit(QJsonObject parameter) {
 
     // Set edit title.
     edit->setTitle(title);
-    edit->setDir(QCoreApplication::applicationDirPath());
+    edit->setDir(QDir::currentPath());
     edit->setFilter(filter);
 
     // Set data for the edit box.
