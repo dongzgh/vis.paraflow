@@ -13,3 +13,34 @@
 5. **Extensibility**: Highly open and customizable, allowing users to plug in custom modules effortlessly.
 
 With **visProcess**, you can enhance productivity and efficiency by automating repetitive tasks and integrating custom solutions seamlessly.
+
+## Setup
+
+### macOS
+
+```bash
+# Clone the repo.
+git clone https://github.com/dongzgh/vis.process.git
+cd vis.process
+
+# List all presets (optional)
+cmake --list-presets=all
+  "(macOS) Debug"
+  "(macOS) Release"
+  "(Windows) Debug"
+  "(Windows) Release"
+  "(Linux) Debug"
+  "(Linux) Release"
+
+# Cconfigure project.
+cmake --preset "(macOS) Debug" # or "(macOS) Release"
+
+# Buil project.
+cd build
+cd debug # or "release"
+cmake --build .
+
+# Run program.
+cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
+./visProcess
+```
