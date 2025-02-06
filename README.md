@@ -1,6 +1,6 @@
-# visProcess
+# visParalytic
 
-**visProcess** is a powerful and versatile workflow modeler designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
+**visParalytic** is a powerful and versatile workflow modeler designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
 
 ![Main Window](/res/capture-main-window.png)
 
@@ -12,7 +12,7 @@
 4. **Direct Workflow Execution**: Run your workflows directly from the user interface without the need for additional tools.
 5. **Extensibility**: Highly open and customizable, allowing users to plug in custom modules effortlessly.
 
-With **visProcess**, you can enhance productivity and efficiency by automating repetitive tasks and integrating custom solutions seamlessly.
+With **visParalytic**, you can enhance productivity and efficiency by automating repetitive tasks and integrating custom solutions seamlessly.
 
 ## Setup
 
@@ -40,7 +40,7 @@ cmake --build .
 
 # Run the program.
 cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
-./visProcess # on windows: visProcess
+./visParalytic # on windows: visParalytic
 ```
 
 ## Prepare Data
@@ -196,7 +196,7 @@ python -m pip install -r requirements.txt
 
 #### Start Modeling
 
-- Run `visProcess`
+- Run `visParalytic`
 - Click `Open Pallet` and select `my_workflow/main.json` to load your workflow pallet definitions
 - Click node and place it in the scene viewer area
 - Drag to connect node parameters

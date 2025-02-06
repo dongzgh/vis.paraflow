@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(visProcess)
+project(visParalytic)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -31,7 +31,7 @@ file(GLOB Implementation_FILES "src/*.cpp")
 qt_add_resources(RESOURCES "res/resources.qrc")
 set(RESOURCE_FILES "res/resources.rc")
 
-add_executable(visProcess
+add_executable(visParalytic
     WIN32
     ${Implementation_FILES}
     ${Header_FILES}
@@ -39,4 +39,4 @@ add_executable(visProcess
     ${RESOURCE_FILES}
  )
 
-target_link_libraries(visProcess Qt::Core Qt6::Widgets Qt6::Svg)
+target_link_libraries(visParalytic Qt::Core Qt6::Widgets Qt6::Svg)
