@@ -26,7 +26,7 @@ visMainWindow::visMainWindow(QWidget* parent)
   setMinimumSize(800, 600);
 
   // Set window title.
-  setWindowTitle("Workflow Modeler");
+  setWindowTitle("visParaflow Workflow Modeler");
 
   // Set window icon.
   setWindowIcon(QIcon(":/icons/workflow.png"));
