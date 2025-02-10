@@ -1,0 +1,112 @@
+{
+    "module": "Process",
+    "nodes": [
+        {
+            "name": "High Pass Filter",
+            "description": "Apply high pass filter to image.",
+            "icon": "high-pass-filter.ico",
+            "parameters": [
+                {
+                    "name": "Image",
+                    "io": "in",
+                    "type": "object"
+                },
+                {
+                    "name": "Kernel",
+                    "io": "in",
+                    "type": "double",
+                    "default": 10
+                },
+                {
+                    "name": "Image",
+                    "io": "out",
+                    "type": "object"
+                }
+            ],
+            "template": "high-pass-filter.py"
+        },
+        {
+            "name": "Low Pass Filter",
+            "description": "Apply high pass filter to image.",
+            "icon": "low-pass-filter.ico",
+            "parameters": [
+                {
+                    "name": "Image",
+                    "io": "in",
+                    "type": "object"
+                },
+                {
+                    "name": "Kernel",
+                    "io": "in",
+                    "type": "double",
+                    "default": 10
+                },
+                {
+                    "name": "Kernel Size",
+                    "io": "in",
+                    "type": "double",
+                    "default": 15
+                },
+                {
+                    "name": "Sigma X",
+                    "io": "in",
+                    "type": "double",
+                    "default": 1
+                },
+                {
+                    "name": "Sigma Y",
+                    "io": "in",
+                    "type": "double",
+                    "default": 0
+                },
+                {
+                    "name": "Image",
+                    "io": "out",
+                    "type": "object"
+                }
+            ],
+            "template": "low-pass-filter.py"
+        },
+        {
+            "name": "Add Images",
+            "description": "Add images to produce one image.",
+            "icon": "add-images.ico",
+            "parameters": [
+                {
+                    "name": "Image 1",
+                    "io": "in",
+                    "type": "object"
+                },
+                {
+                    "name": "Image 1 Weight",
+                    "io": "in",
+                    "type": "double",
+                    "default": 0.5
+                },
+                {
+                    "name": "Image 2",
+                    "io": "in",
+                    "type": "object"
+                },
+                {
+                    "name": "Image 2 Weight",
+                    "io": "in",
+                    "type": "double",
+                    "default": 0.5
+                },
+                {
+                    "name": "Gamma",
+                    "io": "in",
+                    "type": "double",
+                    "default": 0
+                },
+                {
+                    "name": "Image",
+                    "io": "out",
+                    "type": "object"
+                }
+            ],
+            "template": "add-images.py"
+        }
+    ]
+}
