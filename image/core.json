@@ -1,0 +1,62 @@
+{
+  "module": "Core",
+  "nodes": [
+    {
+      "name": "Open Image",
+      "description": "Open image for editing.",
+      "icon": "open-image.ico",
+      "parameters": [
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "res/landscape.jpg",
+          "file": true,
+          "title": "Open Image",
+          "filter": "Image Files (*.jpg;*.jpeg;*.png;*.bmp;*.gif);;All Files (*.*)"
+        },
+        {
+          "name": "Image",
+          "io": "out",
+          "type": "object"
+        }
+      ],
+      "template": "open-image.py"
+    },
+    {
+      "name": "Save Image",
+      "description": "Save image to file.",
+      "icon": "save-image.ico",
+      "parameters": [
+        {
+          "name": "Image",
+          "io": "in",
+          "type": "object"
+        },
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "res/result.jpg",
+          "file": true,
+          "title": "Save Image As",
+          "filter": "Image Files (*.jpg;*.jpeg;*.png;*.bmp;*.gif);;All Files (*.*)"
+        }
+      ],
+      "template": "save-image.py"
+    },
+    {
+      "name": "Show Image",
+      "description": "Show image in window.",
+      "icon": "show-image.ico",
+      "parameters": [
+        {
+          "name": "Image",
+          "io": "in",
+          "type": "object"
+        }
+      ],
+      "template": "show-image.py"
+    }
+  ]
+}

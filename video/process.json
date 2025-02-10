@@ -1,0 +1,28 @@
+{
+    "module": "Process",
+    "nodes": [
+        {
+            "name": "Extract Audio",
+            "description": "Extract audio from video.",
+            "icon": "extract-audio.png",
+            "parameters": [
+                {
+                    "name": "Video",
+                    "io": "in",
+                    "type": "object"
+                },
+                {
+                    "name": "Extracted Audio",
+                    "io": "out",
+                    "type": "object"
+                },
+                {
+                    "name": "Extracted Video",
+                    "io": "out",
+                    "type": "object"
+                }
+            ],
+            "template": "extract-audio.py"
+        }
+    ]
+}
