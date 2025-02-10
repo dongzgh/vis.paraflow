@@ -1,0 +1,73 @@
+{
+  "module": "Core",
+  "nodes": [
+    {
+      "name": "Open Video",
+      "description": "Open video for editing.",
+      "icon": "open-video.ico",
+      "parameters": [
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "../../../assets/video-processing/res/screen-record.mov",
+          "file": true,
+          "title": "Open Video",
+          "filter": "Video Files (*.mov;*.mp4);;All Files (*.*)"
+        },
+        {
+          "name": "Video",
+          "io": "out",
+          "type": "object"
+        }
+      ],
+      "template": "open-video.py"
+    },
+    {
+      "name": "Save Video",
+      "description": "Save video to file.",
+      "icon": "save-video.ico",
+      "parameters": [
+        {
+          "name": "Video",
+          "io": "in",
+          "type": "object"
+        },
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "../../../assets/video-processing/out/result.mov",
+          "file": true,
+          "title": "Save Video As",
+          "filter": "Video Files (*.mov;*.mp4);;All Files (*.*)"
+        },
+        {
+          "name": "FPS",
+          "io": "in",
+          "type": "int",
+          "default": 30
+        },
+        {
+          "name": "Codec",
+          "io": "in",
+          "type": "string"
+        }
+      ],
+      "template": "save-video.py"
+    },
+    {
+      "name": "Play Video",
+      "description": "Play video in window.",
+      "icon": "play-video.ico",
+      "parameters": [
+        {
+          "name": "Video",
+          "io": "in",
+          "type": "object"
+        }
+      ],
+      "template": "play-video.py"
+    }
+  ]
+}
