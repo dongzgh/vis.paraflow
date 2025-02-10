@@ -1,8 +1,0 @@
-{
-    "product": "ImageProcessor",
-    "version": "2025.1",
-    "include": [
-        "./core.json",
-        "./process.json"
-    ]
-}
