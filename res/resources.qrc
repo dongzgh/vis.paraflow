@@ -8,8 +8,9 @@
         <file>open-workflow.png</file>
         <file>save-workflow.png</file>
         <file>undo-workflow.png</file>
+        <file>update-workflow.png</file>
         <file>triangle-down.png</file>
-        <file>triangle-up.png</file>
+        <file>triangle-up.png</file>        
     </qresource>
     <qresource prefix="/textures">
         <file>scene-grid.png</file>

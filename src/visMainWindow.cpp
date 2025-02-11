@@ -66,6 +66,7 @@ void visMainWindow::updateActionStatus() {
   acOpenWorkflow->setEnabled(!palette->isEmpty());
   acSaveWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
   acUndoWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty() && !viewDataStack.isEmpty());
+  acUpdateWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
   acGenerateScript->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
   acRunWorkflow->setEnabled(!palette->isEmpty() && !scene->items().isEmpty());
 }
@@ -103,6 +104,8 @@ void visMainWindow::createToolBar() {
   connect(acSaveWorkflow, &QAction::triggered, this, &visMainWindow::saveWorkflow);
   acUndoWorkflow = bar->addAction(QIcon(":/icons/undo-workflow.png"), "");
   connect(acUndoWorkflow, &QAction::triggered, this, &visMainWindow::undoWorkflow);
+  acUpdateWorkflow = bar->addAction(QIcon(":/icons/update-workflow.png"), "");
+  connect(acUpdateWorkflow, &QAction::triggered, this, &visMainWindow::updateWorkflow);
   acGenerateScript = bar->addAction(QIcon(":/icons/generate-script.png"), "");
   connect(acGenerateScript, &QAction::triggered, this, &visMainWindow::generateScript);
   acRunWorkflow = bar->addAction(QIcon(":/icons/run-workflow.png"), "");
@@ -817,6 +820,11 @@ void visMainWindow::undoWorkflow() {
 
   // Repaint window client area.
   QApplication::processEvents();
+}
+
+void visMainWindow::updateWorkflow() {
+  // Update the view.
+  view->update();
 }
 
 void visMainWindow::resizeEvent(QResizeEvent* event) {

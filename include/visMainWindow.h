@@ -27,6 +27,7 @@ protected:
   void openWorkflow();
   void saveWorkflow();
   void undoWorkflow();
+  void updateWorkflow();
   void generateScript(bool silent = false);
   void runWorkflow();
   void sendToPython();
@@ -57,6 +58,7 @@ private:
   QAction* acOpenWorkflow = nullptr;
   QAction* acSaveWorkflow = nullptr;
   QAction* acUndoWorkflow = nullptr;
+  QAction* acUpdateWorkflow = nullptr;
   QAction* acGenerateScript = nullptr;
   QAction* acRunWorkflow = nullptr;
   visPalette* palette = nullptr;
