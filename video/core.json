@@ -59,7 +59,7 @@
           "name": "Path",
           "io": "in",
           "type": "string",
-          "default": "../../../assets/video-processing/out/result.mp3",
+          "default": "out/result.mp3",
           "file": true,
           "title": "Save Video As",
           "filter": "Video Files (*.mov;*.mp4);;All Files (*.*)"
@@ -81,7 +81,7 @@
           "name": "Path",
           "io": "in",
           "type": "string",
-          "default": "../../../assets/video-processing/out/result.wav",
+          "default": "out/result.wav",
           "file": true,
           "title": "Save Audio As",
           "filter": "Audio Files (*.wav);;All Files (*.*)"
