@@ -196,6 +196,10 @@ void visPalette::openFile(const QString& fileName) {
         "QPushButton:hover { "
         "background-color: rgba(0, 255, 0, 0.5); "
         "}"
+        "QToolTip {"
+        "background-color: rgb(255, 255, 255);"
+        "color: rgb(0, 0, 0);"
+        "}"
       );
 
       // Set button icon.
