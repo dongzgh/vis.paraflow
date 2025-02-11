@@ -21,7 +21,7 @@
       "name": "(Mac) Launch",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/build/debug/bin/visParaflow",
+      "program": "${workspaceFolder}/build/debug/bin/visParaflow.app",
       "args": [],
       "stopOnEntry": false,
       "cwd": "${workspaceFolder}"

@@ -662,15 +662,17 @@ void visMainWindow::sendToPython() {
   QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
   if (QFileInfo(shFileName).exists()) {
     // Activate virtual environment and run Python script.
-    QString command = "source " + shFileName + " && " + "python " + pyFileName;
-    qDebug() << "bash -c " << command;
-    process.start("bash", QStringList() << "-c" << command);
+    QString command = "source " + shFileName + " && python " + pyFileName;
+    QString script = "osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'";
+    qDebug() << script;
+    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
   }
   else {
     // Run Python script.
     QString command = "python " + pyFileName;
-    qDebug() << command;
-    process.start("python", QStringList() << command);
+    QString script = "osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'";
+    qDebug() << script;
+    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
