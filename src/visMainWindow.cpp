@@ -667,14 +667,14 @@ void visMainWindow::sendToPython() {
   if (QFileInfo(shFileName).exists()) {
     // Activate virtual environment and run Python script.
     QString command = "source " + shFileName + " && " + "python3 " + pyFileName;
-    qDebug() << "bash -c " << command;
-    process.start("bash", QStringList() << "-c" << command);
+    qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
+    process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
   }
   else {
     // Run Python script.
     QString command = "python3 " + pyFileName;
-    qDebug() << command;
-    process.start("python3", QStringList() << command);
+    qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
+    process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
   }
 #endif
 
