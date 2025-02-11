@@ -628,8 +628,8 @@ void visMainWindow::sendToPython() {
     QString command = batFileName + " && " + "python " + pyFileName;
 
     // Save the command to a temporary batch file.
-    QString batFile = QDir::tempPath() + "/run.bat";
-    QFile file(batFile);
+    QString runFileName = QDir::tempPath() + "/run.bat";
+    QFile file(runFileName);
     if (file.open(QIODevice::WriteOnly)) {
       QTextStream stream(&file);
       stream << command;
@@ -637,14 +637,25 @@ void visMainWindow::sendToPython() {
     }
 
     // Start the batch file.
-    qDebug() << "cmd.exe /c start " << batFile;
-    process.start("cmd.exe", QStringList() << "/c start " + batFile);
+    qDebug() << "cmd.exe /c start " << runFileName;
+    process.start("cmd.exe", QStringList() << "/c start " + runFileName);
   }
   else {
     // Run Python script.
     QString command = "python " + pyFileName;
-    qDebug() << "cmd.exe /c " << command;
-    process.start("cmd.exe", QStringList() << "/c" << command);
+
+    // Save the command to a temporary batch file.
+    QString runFileName = QDir::tempPath() + "/run.bat";
+    QFile file(runFileName);
+    if (file.open(QIODevice::WriteOnly)) {
+      QTextStream stream(&file);
+      stream << command;
+      file.close();
+    }
+
+    // Start the batch file.
+    qDebug() << "cmd.exe /c start " << runFileName;
+    process.start("cmd.exe", QStringList() << "/c start " + runFileName);
   }
 #elif defined(__APPLE__)
   // Check if virtual environment exists.
