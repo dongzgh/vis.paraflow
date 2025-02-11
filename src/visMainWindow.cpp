@@ -626,8 +626,19 @@ void visMainWindow::sendToPython() {
   if (QFileInfo(batFileName).exists()) {
     // Activate virtual environment and run Python script.
     QString command = batFileName + " && " + "python " + pyFileName;
-    qDebug() << "cmd.exe" << "/c" << command;
-    process.start("cmd.exe", QStringList() << "/c" << command);
+
+    // Save the command to a temporary batch file.
+    QString batFile = QDir::tempPath() + "/run.bat";
+    QFile file(batFile);
+    if (file.open(QIODevice::WriteOnly)) {
+      QTextStream stream(&file);
+      stream << command;
+      file.close();
+    }
+
+    // Start the batch file.
+    qDebug() << "cmd.exe /c start " << batFile;
+    process.start("cmd.exe", QStringList() << "/c start " + batFile);
   }
   else {
     // Run Python script.
