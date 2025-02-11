@@ -2,11 +2,16 @@ cmake_minimum_required(VERSION 3.10)
 
 project(visParaflow)
 
+# Set C++ standard.
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Set automoc and other Qt specific flags.
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+
+# Set include directories.
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Set the output directory for the build executables and libraries.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -24,6 +29,7 @@ endforeach()
 # Find Qt6 component for Regular Expression.
 find_package(Qt6 COMPONENTS Core Widgets Svg REQUIRED)
 
+# Collect the source files.
 file(GLOB Header_FILES "include/*.h")
 file(GLOB Implementation_FILES "src/*.cpp")
 
@@ -31,12 +37,51 @@ file(GLOB Implementation_FILES "src/*.cpp")
 qt_add_resources(RESOURCES "res/resources.qrc")
 set(RESOURCE_FILES "res/resources.rc")
 
-add_executable(visParaflow
-    WIN32
-    ${Implementation_FILES}
-    ${Header_FILES}
-    ${RESOURCES}
-    ${RESOURCE_FILES}
- )
+if (APPLE)
+    message(STATUS "Building on macOS")
 
-target_link_libraries(visParaflow Qt::Core Qt6::Widgets Qt6::Svg)
+    # Set the bundle properties.
+    set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
+
+    # Add the executable target.
+    add_executable(visParaflow
+        MACOSX_BUNDLE
+        ${Implementation_FILES}
+        ${Header_FILES}
+        ${RESOURCES}
+        ${RESOURCE_FILES}
+        res/workflow.icns  # Add the icon file to the bundle
+    )
+
+    # Set the bundle properties.
+    set_target_properties(visParaflow PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.vis.Paraflow"
+        MACOSX_BUNDLE_BUNDLE_NAME "visParaflow"
+        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
+        RESOURCE "${CMAKE_SOURCE_DIR}/res/workflow.icns" # Set the icon for the app bundle
+    )
+elseif (LINUX)
+    message(STATUS "Building on Linux")
+
+    # Add the executable target.
+    add_executable(visParaflow
+        ${Implementation_FILES}
+        ${Header_FILES}
+        ${RESOURCES}
+        ${RESOURCE_FILES}
+    )
+elseif (WIN32)
+    message(STATUS "Building on Windows")
+
+    # Add the executable target.
+    add_executable(visParaflow
+        WIN32
+        ${Implementation_FILES}
+        ${Header_FILES}
+        ${RESOURCES}
+        ${RESOURCE_FILES}
+    )
+endif()
+
+# Set link libraries.
+target_link_libraries(visParaflow Qt6::Core Qt6::Widgets Qt6::Svg)
