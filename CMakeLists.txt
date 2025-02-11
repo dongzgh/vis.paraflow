@@ -60,8 +60,8 @@ if (APPLE)
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
         RESOURCE "${CMAKE_SOURCE_DIR}/res/workflow.icns" # Set the icon for the app bundle
     )
-elseif (LINUX)
-    message(STATUS "Building on Linux")
+elseif (UNIX)
+    message(STATUS "Building on Unix")
 
     # Add the executable target.
     add_executable(visParaflow
