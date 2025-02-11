@@ -55,8 +55,6 @@ if (APPLE)
 
     # Set the bundle properties.
     set_target_properties(visParaflow PROPERTIES
-        MACOSX_BUNDLE_GUI_IDENTIFIER "com.vis.Paraflow"
-        MACOSX_BUNDLE_BUNDLE_NAME "visParaflow"
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
         RESOURCE "${CMAKE_SOURCE_DIR}/res/workflow.icns" # Set the icon for the app bundle
     )
