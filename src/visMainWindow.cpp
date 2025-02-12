@@ -823,8 +823,21 @@ void visMainWindow::undoWorkflow() {
 }
 
 void visMainWindow::updateWorkflow() {
-  // Update the view.
-  view->update();
+  // Get all nodes in scene.
+  QList<visNode*>& nodes = scene->getNodes();
+
+  // Iterate nodes to find if they are updated.
+  for (visNode* node : nodes) {
+    // Get node definition.
+    QJsonObject nodeDef = node->getNodeDef();
+
+    // Check if node is updated.
+    if (!palette->isNodeUpdated(nodeDef)) {
+      // Set node title bar color to dark red.
+      QGraphicsRectItem* titleBar = node->getTitleBar();
+      titleBar->setBrush(Qt::darkRed);
+    }
+  }
 }
 
 void visMainWindow::resizeEvent(QResizeEvent* event) {

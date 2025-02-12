@@ -37,7 +37,7 @@ visNode::visNode(const QJsonObject& nodeDef) : nodeDef(nodeDef) {
 
   // Create a title bar.
   titleBarRect = QRect(spacing, 0, editWidth, titleHeight);
-  QGraphicsRectItem * titleBar = new QGraphicsRectItem(titleBarRect, this);
+  titleBar = new QGraphicsRectItem(titleBarRect, this);
   titleBar->setBrush(Qt::black);
 
   // Create a title text.

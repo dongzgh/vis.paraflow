@@ -17,6 +17,7 @@ public:
   void clear();
   void openFile(const QString& fileName);
   QString getDir() { return dir; }
+  bool isNodeUpdated(const QJsonObject& nodeDef);
 
 signals:
   void signal_stackViewData();
@@ -27,6 +28,7 @@ public slots:
 
 private:
   void setToolBoxStyle();
+  bool compareJsonObjects(const QJsonObject& obj1, const QJsonObject& obj2);
 
 private:
   QVBoxLayout* layout = nullptr;

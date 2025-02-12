@@ -236,3 +236,51 @@ void visPalette::openFile(const QString& fileName) {
     toolBox->addItem(section, module);
   }
 }
+
+// #define INSPECT_JSON
+bool visPalette::compareJsonObjects(const QJsonObject &obj1, const QJsonObject &obj2) {
+  // Convert obj1 and obj2 to JSON strings.
+  QString str1 = QJsonDocument(obj1).toJson(QJsonDocument::Indented);
+  QString str2 = QJsonDocument(obj2).toJson(QJsonDocument::Indented);
+
+  // Compare str1 and str2.
+#ifdef INSPECT_JSON
+  // Log str1 to file.
+  QFile file1("obj1.json");
+  if (file1.open(QIODevice::WriteOnly)) {
+    file1.write(str1.toUtf8());
+    file1.close();
+  }
+
+  // Log str2 to file.
+  QFile file2("obj2.json");
+  if (file2.open(QIODevice::WriteOnly)) {
+    file2.write(str2.toUtf8());
+    file2.close();
+  }
+#endif
+
+  // Return the comparison result.
+  return str1 == str2;
+}
+
+bool visPalette::isNodeUpdated(const QJsonObject& nodeDef) {
+  // Iterate all buttons in the palette and find the button with the nodeDef.
+  for (auto button : buttons) {
+    // Get nodeDef from button.
+    QJsonObject buttonNodeDef = button->property("node").toJsonObject();    
+
+    // Compare nodeDef with buttonNodeDef.
+    if (nodeDef["name"] == buttonNodeDef["name"]) {
+      // Use the compareJsonObjects function to compare the objects.
+      if (compareJsonObjects(nodeDef, buttonNodeDef)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  // Node is not found in the palette.
+  return false;
+}

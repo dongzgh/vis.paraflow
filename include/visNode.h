@@ -25,7 +25,8 @@ public:
   bool inTitleArea(const QPointF& pos) const;
   int inHotArea(const QPointF& pos) const;
   QJsonObject getNodeDef() const { return nodeDef; }
-  int getSpacing() const { return spacing; }  
+  int getSpacing() const { return spacing; } 
+  QGraphicsRectItem* getTitleBar() const { return titleBar; }
 
 signals:
   void signal_nodeMoved();
@@ -56,6 +57,7 @@ private:
   QJsonObject nodeDef;
   int titleHeight{ 30 };
   int spacing{ 10 };
+  QGraphicsRectItem * titleBar = nullptr;
   QWidget* container = nullptr;
   QVBoxLayout* layout = nullptr;
   QList<QWidget*> edits;
