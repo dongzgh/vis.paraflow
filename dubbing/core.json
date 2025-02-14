@@ -35,7 +35,7 @@
           "default": "res/music.mp3",
           "file": true,
           "title": "Open Audio",
-          "filter": "Audio Files (*.wav);;All Files (*.*)"
+          "filter": "Audio Files (*.wav;*.mp3);;All Files (*.*)"
         },
         {
           "name": "Audio",

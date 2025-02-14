@@ -3,6 +3,7 @@
     "version": "2025.1",
     "include": [
         "./core.json",
-        "./process.json"
+        "./process-audio.json",
+        "./process-video.json"
     ]
 }
