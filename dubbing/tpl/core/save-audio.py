@@ -1,7 +1,7 @@
 from moviepy.audio.io.AudioFileClip import AudioFileClip
 import os
 
-# Save video to disk.
+# Save video.
 node_in_audio: AudioFileClip = in_audio
 node_in_path = 'in_path'
 if not os.path.exists(os.path.dirname(node_in_path)):

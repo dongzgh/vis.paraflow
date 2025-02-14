@@ -1,7 +1,7 @@
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import os
 
-# Save video to disk.
+# Save video.
 node_in_video: VideoFileClip = in_video
 node_in_path = 'in_path'
 if not os.path.exists(os.path.dirname(node_in_path)):
