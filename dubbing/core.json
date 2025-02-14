@@ -59,7 +59,7 @@
           "name": "Path",
           "io": "in",
           "type": "string",
-          "default": "out/result.mp3",
+          "default": "out/result.mp4",
           "file": true,
           "title": "Save Video As",
           "filter": "Video Files (*.mov;*.mp4);;All Files (*.*)"
