@@ -648,14 +648,14 @@ void visMainWindow::sendToPython() {
     QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
     QString script = QString("osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'");
     qDebug() << script;
-    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
+    process.startCommand(script);
   }
   else {
     // Run Python script.
     QString command = "python " + pyFileName;
     QString script = "osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'";
     qDebug() << script;
-    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
+    process.startCommand(script);
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
@@ -663,14 +663,16 @@ void visMainWindow::sendToPython() {
   if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
     QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
-    qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
-    process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
+    QString script = QString("gnome-terminal -- bash -c \"") + command + "; exec bash\"";
+    qDebug() << script;
+    process.startCommand(script);
   }
   else {
     // Run Python script.
     QString command = "python3 " + pyFileName;
-    qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
-    process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
+    QString script = QString("gnome-terminal -- bash -c \"") + command + "; exec bash\"";
+    qDebug() << script;
+    process.startCommand(script);
   }
 #endif
 
