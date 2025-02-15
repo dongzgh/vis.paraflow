@@ -386,7 +386,7 @@ QString visMainWindow::generateCode(const QList<int>& sequence, const QList<visN
     QString module = node->getNodeDef()["module"].toString();
 
     // Get template file name.
-    QString tplFileName = QFileInfo(dir + "/tpl/" + module.toLower() + "/" + tpl).absoluteFilePath();
+    QString tplFileName = QFileInfo(dir + "/tpl/" + module.toLower().replace(" ", "-") + "/" + tpl).absoluteFilePath();
 
     // Get template file.
     QFile tplFile(tplFileName);
@@ -662,11 +662,11 @@ void visMainWindow::sendToPython() {
   }
 #elif defined(__APPLE__)
   // Check if virtual environment exists.
-  QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
-  if (QFileInfo(shFileName).exists()) {
+  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python-macos.sh");
+  if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
-    QString command = "source " + shFileName + " && python " + pyFileName;
-    QString script = "osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'";
+    QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
+    QString script = QString("osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'");
     qDebug() << script;
     process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
   }
@@ -679,10 +679,10 @@ void visMainWindow::sendToPython() {
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
-  QString shFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
-  if (QFileInfo(shFileName).exists()) {
+  QString startFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
+  if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
-    QString command = "source " + shFileName + " && " + "python3 " + pyFileName;
+    QString command = "source " + startFileName + " && " + "python3 " + pyFileName;
     qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
     process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
   }

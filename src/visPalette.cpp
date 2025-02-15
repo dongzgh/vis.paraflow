@@ -181,7 +181,7 @@ void visPalette::openFile(const QString& fileName) {
       QString icon = nodeDef["icon"].toString();
 
       // Get icon path.
-      QString iconPath = QFileInfo(dir + "/ico/" + module.toLower() + "/" + icon).absoluteFilePath();
+      QString iconPath = QFileInfo(dir + "/ico/" + module.toLower().replace(" ", "-") + "/" + icon).absoluteFilePath();
 
       // Create node button.
       QPushButton* button = new QPushButton();      
