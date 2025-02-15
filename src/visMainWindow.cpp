@@ -679,10 +679,10 @@ void visMainWindow::sendToPython() {
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
-  QString startFileName = QDir(dir).absoluteFilePath(".env/bin/activate");
+  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python-linux.sh");
   if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
-    QString command = "source " + startFileName + " && " + "python3 " + pyFileName;
+    QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
     qDebug() << "gnome-terminal -- bash -c \"" << command << "; exec bash\"";
     process.start("gnome-terminal", QStringList() << "--" << "bash" << "-c" << command + "; exec bash");
   }
