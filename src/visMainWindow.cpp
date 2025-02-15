@@ -648,14 +648,14 @@ void visMainWindow::sendToPython() {
     QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
     QString script = QString("osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'");
     qDebug() << script;
-    process.startCommand(script);
+    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
   }
   else {
     // Run Python script.
     QString command = "python " + pyFileName;
     QString script = "osascript -e 'tell application \"Terminal\" to do script \"" + command + "\"'";
     qDebug() << script;
-    process.startCommand(script);
+    process.start("osascript", QStringList() << "-e" << "tell application \"Terminal\" to do script \"" + command + "\"");
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
