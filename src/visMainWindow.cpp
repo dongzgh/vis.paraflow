@@ -625,44 +625,24 @@ void visMainWindow::sendToPython() {
 
 #if defined(_WIN32)
   // Check if virtual environment exists.
-  QString batFileName = QDir(dir).absoluteFilePath(".env/Scripts/activate.bat");
-  if (QFileInfo(batFileName).exists()) {
+  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python.bat");
+  if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
-    QString command = batFileName + " && " + "python " + pyFileName;
-
-    // Save the command to a temporary batch file.
-    QString runFileName = QDir::tempPath() + "/run.bat";
-    QFile file(runFileName);
-    if (file.open(QIODevice::WriteOnly)) {
-      QTextStream stream(&file);
-      stream << command;
-      file.close();
-    }
-
-    // Start the batch file.
-    qDebug() << "cmd.exe /c start " << runFileName;
-    process.start("cmd.exe", QStringList() << "/c start " + runFileName);
+    QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
+    QString script = QString("cmd.exe /c start ") + command;
+    qDebug() << script;
+    process.startCommand(script);
   }
   else {
     // Run Python script.
     QString command = "python " + pyFileName;
-
-    // Save the command to a temporary batch file.
-    QString runFileName = QDir::tempPath() + "/run.bat";
-    QFile file(runFileName);
-    if (file.open(QIODevice::WriteOnly)) {
-      QTextStream stream(&file);
-      stream << command;
-      file.close();
-    }
-
-    // Start the batch file.
-    qDebug() << "cmd.exe /c start " << runFileName;
-    process.start("cmd.exe", QStringList() << "/c start " + runFileName);
+    QString script = QString("cmd.exe /c start ") + command;
+    qDebug() << script;
+    process.startCommand(script);
   }
 #elif defined(__APPLE__)
   // Check if virtual environment exists.
-  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python-macos.sh");
+  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python.sh");
   if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
     QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
@@ -679,7 +659,7 @@ void visMainWindow::sendToPython() {
   }
 #elif defined(__linux__)
   // Check if virtual environment exists.
-  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python-linux.sh");
+  QString startFileName = QDir(dir).absoluteFilePath("scripts/run-python.sh");
   if (QFileInfo(startFileName).exists()) {
     // Activate virtual environment and run Python script.
     QString command = QString("%1 %2").arg(startFileName).arg(pyFileName);
