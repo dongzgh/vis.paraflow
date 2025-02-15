@@ -2,7 +2,7 @@ import whisper
 import json
 
 # Transcribe the audio file.
-n066_in_path = '/Users/dong/Documents/github/visParaflowAssets/video/res/speech.wav'
+n066_in_path = '/Users/dong/Documents/github/visParaflowAssets/dubbing/res/speech.wav'
 n066_out_path = 'out_path'
 model = whisper.load_model("base")  # You can also try "small", "medium", or "large" for better accuracy
 result = model.transcribe(n066_in_path, language="en")

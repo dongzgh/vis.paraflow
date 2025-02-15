@@ -9,7 +9,7 @@ PYTHON_VERSION="3.11.11"
 
 # Set the current working directory to the directory of the current file
 cd "$(dirname "$(dirname "$0")")"
-echo "Current working directory set to: $(pwd)"
+echo "Current working directory set to: $(pwd)."
 
 # Check if the system Python version matches the required version
 SYSTEM_PYTHON_VERSION=$(python --version 2>&1)
@@ -20,10 +20,10 @@ else
   echo "System Python version matches the required version."
 fi
 
-# Activate the local Python virtual environment
+# Activate the Python virtual environment
 if [ -d .env ]; then
   source .env/bin/activate
-  echo "Local Python virtual environment activated."
+  echo "Python virtual environment activated."
 else
   echo ".env directory not found."
 fi
@@ -34,7 +34,7 @@ if [ -z "$1" ]; then
     exit 1
 else
     PYTHON_SCRIPT_PATH="$1"
-    echo "Python script path: $PYTHON_SCRIPT_PATH"
+    echo "Python script path: $PYTHON_SCRIPT_PATH."
 fi
 
 # Run the Python script
