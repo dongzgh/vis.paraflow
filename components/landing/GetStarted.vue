@@ -25,7 +25,7 @@ const steps = [
 </script>
 
 <template>
-  <div class="place-items-center mt-16 md:mt-0">
+  <div id="GetStarted" class="place-items-center mt-16 md:mt-0">
     <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
       How to Get Started with visParaflow
     </h2>

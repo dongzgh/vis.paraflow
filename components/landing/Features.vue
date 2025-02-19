@@ -39,8 +39,8 @@ const features = [
 ];
 </script>
 
-<template id="Features">
-  <div class="place-items-center mt-16 md:mt-0">
+<template>
+  <div id="Features" class="place-items-center mt-16 md:mt-0">
     <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
       Why visParaflow for Workflow Modeling
     </h2>
