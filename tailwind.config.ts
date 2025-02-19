@@ -17,6 +17,5 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
-  darkMode: 'selector', // or 'media' or 'class'
+  plugins: [require("@tailwindcss/typography")]
 };

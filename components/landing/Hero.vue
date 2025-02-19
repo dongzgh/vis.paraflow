@@ -4,7 +4,7 @@
       <img
         class="transition-transform transform hover:scale-110"
         src="~/assets/img/hero.png"
-        alt="Starship starts the engine"
+        alt="Workflow modeling with visParaflow"
         loading="eager"
         format="avif"
         width="800"

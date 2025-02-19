@@ -39,17 +39,17 @@ const features = [
 ];
 </script>
 
-<template>
-  <div class="mt-16 md:mt-0">
+<template id="Features">
+  <div class="place-items-center mt-16 md:mt-0">
     <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
-      Everything you need to start with workflow modeling
+      Why visParaflow for Workflow Modeling
     </h2>
     <p class="text-lg mt-4 text-slate-600">
-      visParaflow comes with premade node sets to get you started. Customize and extend them to define your own node sets for your specific needs. 
+      Feature rich and easy to use. visParaflow is the tool you need for your next workflow modeling and script generation project.
     </p>
   </div>
 
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 place-items-center mt-16 mb-16">
     <div v-for="item of features" class="flex gap-4 items-start">
       <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
         <Icon class="text-white" :name="item.icon" />
