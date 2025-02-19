@@ -42,7 +42,7 @@ const steps = [
       </div>
       <div>
         <h3 class="font-semibold text-lg">{{ step.title }}</h3>
-        <div class="md:order-1 hidden md:block">
+        <div class="md:order-1 hidden md:block mt-6">
           <img
             class="transition-transform transform hover:scale-110"
             :src="step.picture"
