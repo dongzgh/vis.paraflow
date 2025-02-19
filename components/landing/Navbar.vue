@@ -25,7 +25,7 @@ const open = ref(false);
           <img
             src="@/assets/img/workflow.svg"
             alt="Workflow Icon"
-            class="h-10 w-10 inline-block mr-1"
+            class="h-6 w-6 inline-block mr-1"
           />
           <span class="text-slate-500">vis</span>
           <span class="font-bold text-slate-800">Paraflow</span>
@@ -34,7 +34,7 @@ const open = ref(false);
           <button @click="open = !open" class="text-gray-800">
             <svg
               fill="currentColor"
-              class="w-10 h-10"
+              class="w-4 h-4"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
