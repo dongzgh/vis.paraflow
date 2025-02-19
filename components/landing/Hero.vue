@@ -1,6 +1,6 @@
 <template>
   <main class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-8">
-    <div class="p-12 md:order-1 hidden md:block">
+    <div class="md:order-1 hidden md:block">
       <img
         class="transition-transform transform hover:scale-110"
         src="~/assets/img/hero.png"
