@@ -1,8 +1,8 @@
 <script setup>
-  import defineNodes from '@/assets/img/define-nodes.png';
-  import loadNodes from '@/assets/img/load-nodes.png';
-  import modelWorkflow from '@/assets/img/model-workflow.png';
-  import generateScript from '@/assets/img/generate-script.png';
+import defineNodes from '@/assets/img/define-nodes.png';
+import loadNodes from '@/assets/img/load-nodes.png';
+import modelWorkflow from '@/assets/img/model-workflow.png';
+import generateScript from '@/assets/img/generate-script.png';
 
 const steps = [
   {
@@ -35,10 +35,11 @@ const steps = [
     </p>
   </div>
 
-  <div
-    class="grid sm:grid-cols-2 md:grid-cols-4 place-items-top mt-16 mb-16"
-  >
+  <div class="grid sm:grid-cols-2 md:grid-cols-4 place-items-top mt-16 mb-16">
     <div v-for="step of steps" class="flex gap-4 items-start">
+      <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
+        <Icon class="text-white" name="bx:bxs-chevron-right" />
+      </div>
       <div>
         <h3 class="font-semibold text-lg">{{ step.title }}</h3>
         <div class="md:order-1 hidden md:block">
