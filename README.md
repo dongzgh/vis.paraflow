@@ -16,7 +16,7 @@ With **visParaflow**, you can enhance productivity and efficiency by automating 
 
 ## Setup
 
-```bash
+```shell
 # Clone the repo.
 git clone https://github.com/dongzgh/vis.process.git
 cd vis.process
@@ -42,6 +42,22 @@ cmake --build .
 cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 ./visParaflow # on windows: visParaflow
 ```
+
+## Deployment
+
+### Windows
+
+- Locate `windeployqt` or `windeployqt6` in `<path to Qt toolset>\bin`:
+
+```shell
+windeployqt <path-to-your-executable> # for Qt5
+windeployqt6 <path-to-your-executable> # for Qt6
+```
+
+- Open `make-installer-win32.nsi` in Visual Studio Code
+- `F1` to open `Command Palette` and select `Tasks: Run Task`
+- Select `Build NSIS Script` from the drop down list
+- Installer will be created in the `scripts` folder
 
 ## Prepare Data
 
@@ -187,7 +203,7 @@ Example structure:
 
 #### Install Packages
 
-```bash
+```shell
 cd dat/my_workflow
 python -m venv .env
 source .env/bin/activate
