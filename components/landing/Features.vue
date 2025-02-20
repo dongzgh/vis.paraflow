@@ -4,37 +4,37 @@ const features = [
     title: "GUI Based Modeling",
     description:
       "Node based visual modeling tool. Drag, drop and connect nodes to create your own workflows. Save and load to reuse.",
-    icon: "bx:bxs-paint",
+    icon: "material-symbols:visibility",
   },
   {
     title: "Open Nodes Definition",
     description:
       "Define your own nodes and their templates. Use them in your workflows. Share them with others.",
-    icon: "bx:bxs-cube-alt",
+    icon: "material-symbols:person-play-rounded",
   },
   {
     title: "On Demand Node Sets",
     description:
       "Predefined node sets made available for common tasks. Customize and extend them to suit your own needs.",
-    icon: "bx:bxs-data",
+    icon: "material-symbols:request-page",
   },
   {
     title: "Cross Platform Supported",
     description:
       "Runs on Windows, macOS and Linux. Same user interface and same data. No need to worry about compatibility issues.",
-    icon: "bx:bxs-file-find",
+    icon: "material-symbols:crossword",
   },
   {
     title: "Automatic Script Generation",
     description:
       "One-click script generation. Python scripts is natively supported, but can be extended to other languages.",
-    icon: "bx:bxs-file-find",
+    icon: "material-symbols:auto-fix",
   },
   {
     title: "Easy Parametric Study",
     description:
       "No need to struggle with searching and modifying parameter values in scripts. What you see is what you get.",
-    icon: "bx:bxs-user",
+    icon: "material-symbols:database-search-rounded",
   },
 ];
 </script>
