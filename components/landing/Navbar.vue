@@ -7,10 +7,6 @@ const menuitems = [
   {
     title: 'Get Started',
     path: '/#GetStarted',
-  },
-  {
-    title: 'Use Cases',
-    path: '/#UseCases',
   }
 ];
 
