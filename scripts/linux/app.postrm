@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Variables 
+appname="visParaflow"
+
+# Remove the app script from /usr/local/bin
+rm -f /usr/local/bin/$appname
+
+exit 0
