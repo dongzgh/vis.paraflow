@@ -21,6 +21,13 @@
         "${file}"
       ],
       "group": "build"
+    },
+    {
+      "label": "Run Shell Script",
+      "type": "shell",
+      "command": "${file}",
+      "group": "build",
+      "problemMatcher": []
     }
   ]
 }
