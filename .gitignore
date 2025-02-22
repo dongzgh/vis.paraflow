@@ -19,5 +19,4 @@ CMakeUserPresets.json
 build/
 .env/
 app/
-deploy/
 *.dep

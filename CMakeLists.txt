@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
+# Set the project variables.
 project(visParaflow)
+set(PRODUCT ${CMAKE_PROJECT_NAME})
+set(VERSION 1.0.0)
+set(DESCRIPTION "A workflow modeling and script generation tool.")
+set(AUTHOR "Dong Zhao")
 
 # Set C++ standard.
 set(CMAKE_CXX_STANDARD 17)
@@ -44,7 +49,7 @@ if (APPLE)
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
 
     # Add the executable target.
-    add_executable(visParaflow
+    add_executable(${PRODUCT}
         MACOSX_BUNDLE
         ${Implementation_FILES}
         ${Header_FILES}
@@ -54,7 +59,7 @@ if (APPLE)
     )
 
     # Set the bundle properties.
-    set_target_properties(visParaflow PROPERTIES
+    set_target_properties(${PRODUCT} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
         RESOURCE "${CMAKE_SOURCE_DIR}/res/workflow.icns" # Set the icon for the app bundle
     )
@@ -62,7 +67,7 @@ elseif (UNIX)
     message(STATUS "Building on Unix")
 
     # Add the executable target.
-    add_executable(visParaflow
+    add_executable(${PRODUCT}
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
@@ -72,7 +77,7 @@ elseif (WIN32)
     message(STATUS "Building on Windows")
 
     # Add the executable target.
-    add_executable(visParaflow
+    add_executable(${PRODUCT}
         WIN32
         ${Implementation_FILES}
         ${Header_FILES}
@@ -82,4 +87,9 @@ elseif (WIN32)
 endif()
 
 # Set link libraries.
-target_link_libraries(visParaflow Qt6::Core Qt6::Widgets Qt6::Svg)
+target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
+
+# Set CPack targets.
+if (UNIX)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/linux)
+endif()
