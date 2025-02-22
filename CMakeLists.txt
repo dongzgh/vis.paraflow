@@ -92,4 +92,6 @@ target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
 # Set CPack targets.
 if (UNIX)
     add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/linux)
+elseif (WIN32)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/windows)
 endif()
