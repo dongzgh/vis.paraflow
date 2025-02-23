@@ -60,10 +60,6 @@ echo "The app icon has been copied to the package."
 dpkg-deb --build $pkgdir $appname-$verison.deb
 echo "The DEBIAN package has been created."
 
-# Move the package to the deploy directory
-mv $appname.deb ../../build/release/
-echo "The DEBIAN package has been moved to the build directory."
-
 # Clean up the package directory
 rm -rf $pkgdir
 echo "The package directory has been cleaned up."

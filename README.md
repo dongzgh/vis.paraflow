@@ -45,6 +45,39 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 ## Deployment
 
+### Linux
+
+#### Using `make-app.sh`
+
+- Open `make-app.sh` in Visual Studio Code
+- `F1` to open `Command Palette` and select `Tasks: Run Task`
+- Select `Run Shell Script` from the drop down list
+- `DEBIAN` package is created in the `deploy/linux` folder
+
+#### Using `cpack`
+
+- Open terminal in the `build/release` directory
+- Run `cpack`
+- `DEBIAN` package is created in the `deploy/linux` folder
+
+#### Notes
+
+- Use the following commands to check the `debian` package:
+
+```bash
+ar x visParaflow-<version>.deb
+mkdir tmp
+tar -xzf data.tar.gz -C tmp # for gz format
+tar -xvf data.tar.zst -C tmp # for zst format
+```
+
+- Install/uninstall the package using:
+
+```bash
+sudo dpkg -i visParaflow-<version>.deb # install
+sudo dpkg -r visParaflow-<version>.deb # uninstall
+```
+
 ### Windows
 
 - Copy all Qt dependencies to the binary directory (e.g., `bin`)
