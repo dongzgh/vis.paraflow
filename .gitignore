@@ -19,4 +19,7 @@ CMakeUserPresets.json
 build/
 .env/
 app/
+*.app
 *.dep
+*.exe
+
