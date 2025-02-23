@@ -47,17 +47,27 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 ### Windows
 
+- Copy all Qt dependencies to the binary directory (e.g., `bin`)
 - Locate `windeployqt` or `windeployqt6` in `<path to Qt toolset>\bin`:
 
 ```shell
+# Cop all Qt dependencies over to bin folder.
 windeployqt <path-to-your-executable> # for Qt5
 windeployqt6 <path-to-your-executable> # for Qt6
 ```
 
+#### Using `make-app.nsi`
+
 - Open `deploy/windows/make-app.nsi` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Build NSIS Script` from the drop down list
-- Installer will be created in the `deploy/windows` folder
+- `NSIS` installer is created in the `deploy/windows` folder
+
+#### Using `cpack`
+
+- Open terminal in the `build/release` directory
+- Run `cpack`
+- `NSIS` installer is created in the `deploy/windows` folder
 
 ## Prepare Data
 
