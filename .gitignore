@@ -20,6 +20,7 @@ build/
 .env/
 app/
 *.app
+*.dmg
 *.dep
 *.exe
 

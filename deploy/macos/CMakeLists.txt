@@ -17,11 +17,5 @@ set(CPACK_GENERATOR "DragNDrop")
 # Include the CPack module.
 include(CPack)
 
-# Set the CPack variables for the Apple Disk Image package.
-set(CPACK_DMG_VOLUME_NAME "${PRODUCT}")
-
-# Specify the Qt components to include in the package.
-set(CPACK_COMPONENTS_ALL Libraries Application)
-
 # Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PRODUCT}.app" DESTINATION "/Applications/")
+install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PRODUCT}.app" DESTINATION /Applications )

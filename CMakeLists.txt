@@ -57,13 +57,19 @@ if (APPLE)
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
+        ${ICNS_MACOS}
     )
 
-    # Set the bundle properties.
-    set_target_properties(${PRODUCT} PROPERTIES
-        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}"
-        MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/${ICNS_MACOS}"
-    )
+    # Set the bundle icon
+    set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/${ICNS_MACOS}")
+    set_source_files_properties(${MACOSX_BUNDLE_ICON_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    # Set the bundle Info.plist
+    set_target_properties(${PRODUCT} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
+
+    # Include icon in the bundle
+    target_sources(${PRODUCT} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
+
 elseif (UNIX)
     message(STATUS "Building on Unix")
 

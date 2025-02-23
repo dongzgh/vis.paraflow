@@ -7,20 +7,12 @@
     <key>CFBundleName</key>
     <string>visParaflow</string>
     <key>CFBundleVersion</key>
-    <string>1.0</string>
+    <string>1.0.0</string>
     <key>CFBundleExecutable</key>
     <string>visParaflow</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
-    <key>CFBundleInfoDictionaryVersion</key>
-    <string>6.0</string>
-    <key>NSPrincipalClass</key>
-    <string>NSApplication</string>
-    <key>NSHighResolutionCapable</key>
-    <true/>
     <key>CFBundleIconFile</key>
-    <string>workflow</string>
+    <string>app</string>
 </dict>
 </plist>
