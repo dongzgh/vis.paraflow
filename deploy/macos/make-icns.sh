@@ -4,12 +4,12 @@
 set -e
 
 # Define the input PNG file and output ICNS file
-INPUT_PNG="../res/workflow.png"
-OUTPUT_DIR="../res/"
+INPUT_PNG="../../res/workflow.png"
+OUTPUT_DIR="./"
 
 # Create the iconset directory
-ICONSET_DIR="workflow.iconset"
-ICONSET_ICNS="workflow.icns"
+ICONSET_DIR="app.iconset"
+ICONSET_ICNS="app.icns"
 mkdir -p $ICONSET_DIR
 
 # Generate the various icon sizes
@@ -27,10 +27,7 @@ sips -z 1024 1024 $INPUT_PNG --out $ICONSET_DIR/icon_512x512@2x.png
 # Convert the iconset to an ICNS file
 iconutil -c icns $ICONSET_DIR
 
-# Move the ICNS file to the desired location
-mv $ICONSET_ICNS $OUTPUT_DIR
-
 # Clean up the iconset directory
-rm -r $ICONSET_DIR
+rm -rf $ICONSET_DIR
 
 echo "ICNS file created at $OUTPUT_DIR"

@@ -40,10 +40,13 @@ file(GLOB Implementation_FILES "src/*.cpp")
 
 # Add the resource file
 qt_add_resources(RESOURCES "res/resources.qrc")
-set(RESOURCE_FILES "res/resources.rc")
 
 if (APPLE)
     message(STATUS "Building on macOS")
+
+    # Set macOS specific resources.
+    set(PLIST_MACOS "deploy/macos/Info.plist")
+    set(ICNS_MACOS "deploy/macos/app.icns")
 
     # Set the bundle properties.
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
@@ -54,14 +57,12 @@ if (APPLE)
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
-        ${RESOURCE_FILES}
-        res/workflow.icns  # Add the icon file to the bundle
     )
 
     # Set the bundle properties.
     set_target_properties(${PRODUCT} PROPERTIES
-        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
-        RESOURCE "${CMAKE_SOURCE_DIR}/res/workflow.icns" # Set the icon for the app bundle
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}"
+        MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/${ICNS_MACOS}"
     )
 elseif (UNIX)
     message(STATUS "Building on Unix")
@@ -71,10 +72,12 @@ elseif (UNIX)
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
-        ${RESOURCE_FILES}
     )
 elseif (WIN32)
     message(STATUS "Building on Windows")
+
+    # Set windows specific resources.
+    set(RESOURCE_WIN32 "res/resources.rc")
 
     # Add the executable target.
     add_executable(${PRODUCT}
@@ -82,7 +85,7 @@ elseif (WIN32)
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
-        ${RESOURCE_FILES}
+        ${RESOURCE_WIN32}
     )
 endif()
 
@@ -90,7 +93,9 @@ endif()
 target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
 
 # Set CPack targets.
-if (UNIX)
+if (APPLE)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/macos)
+elseif (UNIX)
     add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/linux)
 elseif (WIN32)
     add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/windows)

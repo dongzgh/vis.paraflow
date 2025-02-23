@@ -54,10 +54,10 @@ windeployqt <path-to-your-executable> # for Qt5
 windeployqt6 <path-to-your-executable> # for Qt6
 ```
 
-- Open `make-installer-win32.nsi` in Visual Studio Code
+- Open `deploy/windows/make-app.nsi` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Build NSIS Script` from the drop down list
-- Installer will be created in the `scripts` folder
+- Installer will be created in the `deploy/windows` folder
 
 ## Prepare Data
 
