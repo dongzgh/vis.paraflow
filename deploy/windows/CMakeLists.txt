@@ -46,5 +46,5 @@ include(CPack) # has to be after shortcuts instructions are set, otherwise the s
 
 # Install the executable to the temporary directory
 install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/"
-  DESTINATION "/"
-  FILES_MATCHING PATTERN "*" PATTERN "*.pdb" EXCLUDE)
+  DESTINATION /
+  FILES_MATCHING PATTERN * PATTERN *.pdb EXCLUDE)
