@@ -19,7 +19,6 @@ mkdir -p $pkgdir/DEBIAN
 mkdir -p $pkgdir/opt/$appname/bin
 mkdir -p $pkgdir/opt/$appname/lib
 mkdir -p $pkgdir/opt/$appname/plugins
-mkdir -p $pkgdir/usr/local/bin
 mkdir -p $pkgdir/usr/share/applications
 mkdir -p $pkgdir/usr/share/icons/hicolor/48x48/apps
 echo "The destination package directory have been created."
@@ -27,6 +26,10 @@ echo "The destination package directory have been created."
 # Copy the DEBIAN control file.
 cp debian/control $pkgdir/DEBIAN/control
 echo "The DEBIAN control file has been copied to package."
+
+# Copy the DEBIAN postinst file.
+cp debian/postinst $pkgdir/DEBIAN/postinst
+echo "The DEBIAN postinst file has been copied to package."
 
 # Copy the DEBIAN postrm file.
 cp debian/postrm $pkgdir/DEBIAN/postrm
@@ -45,7 +48,9 @@ cp -r /opt/Qt/6.8.1/gcc_64/plugins/platforms $pkgdir/opt/$appname/plugins/
 echo "The dependency plugins have been copied to the package."
 
 # Copy the app script to the destination directory
-cp app.sh $pkgdir/usr/local/bin/$appname
+# Cope app stript file directly to usr/local/bin sometimes run into permission issues,
+# so we copy it to /opt/${PRODUCT} first
+cp app.sh $pkgdir/opt/$appname
 echo "The app script has been copied to the package."
 
 # Copy the app desktop file to the destination directory

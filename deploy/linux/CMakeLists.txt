@@ -22,6 +22,7 @@ set(CPACK_DEBIAN_PACKAGE_SECTION utils)
 set(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
 "${CMAKE_SOURCE_DIR}/deploy/linux/debian/control"
+"${CMAKE_SOURCE_DIR}/deploy/linux/debian/postinst"
 "${CMAKE_SOURCE_DIR}/deploy/linux/debian/postrm")
 
 # Include the CPack module.
@@ -44,7 +45,9 @@ set(Qt6_PLUGINS_DIR "${Qt6_LIB_DIR}/../plugins")
 install(DIRECTORY "${Qt6_PLUGINS_DIR}/platforms" DESTINATION /opt/${PRODUCT}/plugins/ USE_SOURCE_PERMISSIONS)
 
 # Install app script file
-install(PROGRAMS "${CMAKE_SOURCE_DIR}/deploy/linux/app.sh" DESTINATION /usr/local/bin/ RENAME ${PRODUCT})
+# Cope app stript file directly to usr/local/bin sometimes run into permission issues,
+# so we copy it to /opt/${PRODUCT} first
+install(PROGRAMS "${CMAKE_SOURCE_DIR}/deploy/linux/app.sh" DESTINATION /opt/${PRODUCT}/)
 
 # Install app desktop and icon file
 install(FILES "${CMAKE_SOURCE_DIR}/deploy/linux/app.desktop" DESTINATION /usr/share/applications/ RENAME ${PRODUCT}.desktop)
