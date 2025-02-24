@@ -45,6 +45,22 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 ## Deployment
 
+### MacOS
+
+### Using `make-app.sh`
+
+- Open `make-app.sh` in Visual Studio Code
+- `F1` to open `Command Palette` and select `Tasks: Run Task`
+- Select `Run Shell Script` from the drop down list
+- `DMG` package is created in the `deploy/macos` folder
+
+#### Using `cpack`
+
+- Open terminal in the `build/release` directory
+- Run `macdeployqt6 visParaflow.app`
+- Run `cpack`
+- `DMG` package is created in the `deploy/macos` folder
+
 ### Linux
 
 #### Using `make-app.sh`
@@ -81,12 +97,11 @@ sudo dpkg -r visParaflow-<version>.deb # uninstall
 ### Windows
 
 - Copy all Qt dependencies to the binary directory (e.g., `bin`)
-- Locate `windeployqt` or `windeployqt6` in `<path to Qt toolset>\bin`:
+- Locate `windeployqt6` in `<path to Qt toolset>\bin`:
 
 ```shell
 # Cop all Qt dependencies over to bin folder.
-windeployqt <path-to-your-executable> # for Qt5
-windeployqt6 <path-to-your-executable> # for Qt6
+windeployqt6 <path-to-your-executable>
 ```
 
 #### Using `make-app.nsi`
