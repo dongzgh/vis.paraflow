@@ -7,7 +7,6 @@
 #include <QFontMetrics>
 #include <QLineEdit>
 #include <QGraphicsProxyWidget>
-#include <QDebug>
 #include <QCompleter>
 #include <QIntValidator>
 #include <QDoubleValidator>

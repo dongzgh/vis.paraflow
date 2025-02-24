@@ -3,7 +3,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsProxyWidget>
-#include <QDebug>
 
 #include "include/visNode.h"
 #include "include/visConnector.h"
