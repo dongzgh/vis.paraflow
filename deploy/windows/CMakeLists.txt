@@ -25,11 +25,11 @@ set(CPACK_NSIS_INSTALLED_ICON_NAME ${PRODUCT}.exe)
 
 # Get user public desktop directory
 string(REPLACE "\\" "\\\\" PDESKTOP "$ENV{PUBLIC}\\Desktop")
-message(STATUS "PDESKTOP: ${PDESKTOP}")
+# message(STATUS "PDESKTOP: ${PDESKTOP}")
 
 # Get start menu directory
 string(REPLACE "\\" "\\\\" SMPROGRAMS "$ENV{APPDATA}\\Microsoft\\Windows\\Start Menu\\Programs")
-message(STATUS "SMPROGRAMS: ${SMPROGRAMS}")
+# message(STATUS "SMPROGRAMS: ${SMPROGRAMS}")
 
 # Create shortcuts
 set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
