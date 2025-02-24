@@ -23,14 +23,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Ensure the output directory is the same for all configurations
-foreach(CONFIGURATION ${CMAKE_CONFIGURATION_TYPES})
-    string(TOUPPER ${CONFIGURATION} CONFIGURATION_UPPER)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CONFIGURATION_UPPER} ${CMAKE_BINARY_DIR}/bin)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIGURATION_UPPER} ${CMAKE_BINARY_DIR}/lib)
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIGURATION_UPPER} ${CMAKE_BINARY_DIR}/lib)
-endforeach()
-
 # Find Qt6 component for Regular Expression.
 find_package(Qt6 COMPONENTS Core Widgets Svg REQUIRED)
 
@@ -93,6 +85,21 @@ elseif (WIN32)
         ${RESOURCES}
         ${RESOURCE_WIN32}
     )
+endif()
+
+# Check build type.
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "Building in Debug mode")
+    target_compile_definitions(${PRODUCT} PRIVATE DEBUG)
+elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+    message(STATUS "Building in Release with Debug Info mode")
+    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
+elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+    message(STATUS "Building in Release mode")
+    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
+else()
+    message(STATUS "Building in MinSizeRel mode")
+    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
 endif()
 
 # Set link libraries.
