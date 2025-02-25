@@ -42,6 +42,7 @@
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug",
         "CMAKE_BUILD_TYPE": "Debug"
       }
     },
@@ -52,6 +53,7 @@
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     },
@@ -81,6 +83,18 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "(Windows) Debug",
+      "configurePreset": "(Windows) Debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "(Windows) Release",
+      "configurePreset": "(Windows) Release",
+      "configuration": "RelWithDebInfo"
     }
   ]
 }
