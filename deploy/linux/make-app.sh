@@ -49,7 +49,7 @@ echo "The dependency plugins have been copied to the package."
 
 # Copy the app script to the destination directory
 # Cope app stript file directly to usr/local/bin sometimes run into permission issues,
-# so we copy it to /opt/${PRODUCT} first
+# so we copy it to /opt/${CMAKE_PROJECT_NAME} first
 cp app.sh $pkgdir/opt/$appname
 echo "The app script has been copied to the package."
 

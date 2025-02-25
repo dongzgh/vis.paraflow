@@ -2,15 +2,15 @@
 include(InstallRequiredSystemLibraries)
 
 # Set the CPack variables.
-set(CPACK_PACKAGE_NAME ${PRODUCT})
+set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${VERSION})
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
 set(CPACK_PACKAGE_VERSION_PATCH 0)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${DESCRIPTION}")
-set(CPACK_PACKAGE_VENDOR ${PRODUCT})
+set(CPACK_PACKAGE_VENDOR ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
-set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PRODUCT})
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/deploy/windows")
 
 # Set the CPack generator to NSIS.
@@ -21,7 +21,7 @@ set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/deploy/windows/app.ico")
 set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/deploy/windows/app.ico")
 set(CPACK_NSIS_DISPLAY_NAME ${CPACK_PACKAGE_NAME})
 set(CPACK_NSIS_IGNORE_LICENSE_PAGE ON)
-set(CPACK_NSIS_INSTALLED_ICON_NAME ${PRODUCT}.exe)
+set(CPACK_NSIS_INSTALLED_ICON_NAME ${CMAKE_PROJECT_NAME}.exe)
 
 # Get user public desktop directory
 string(REPLACE "\\" "\\\\" PDESKTOP "$ENV{PUBLIC}\\Desktop")
@@ -33,13 +33,13 @@ string(REPLACE "\\" "\\\\" SMPROGRAMS "$ENV{APPDATA}\\Microsoft\\Windows\\Start 
 
 # Create shortcuts
 set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
-CreateShortCut '${SMPROGRAMS}\\\\${PRODUCT}.lnk' '$INSTDIR\\\\${PRODUCT}.exe'
-CreateShortCut '${PDESKTOP}\\\\${PRODUCT}.lnk' '$INSTDIR\\\\${PRODUCT}.exe'")
+CreateShortCut '${SMPROGRAMS}\\\\${CMAKE_PROJECT_NAME}.lnk' '$INSTDIR\\\\${CMAKE_PROJECT_NAME}.exe'
+CreateShortCut '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk' '$INSTDIR\\\\${CMAKE_PROJECT_NAME}.exe'")
 
 # Delete shortcuts
 set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
-Delete '${SMPROGRAMS}\\\\${PRODUCT}.lnk'
-Delete '${PDESKTOP}\\\\${PRODUCT}.lnk'")  
+Delete '${SMPROGRAMS}\\\\${CMAKE_PROJECT_NAME}.lnk'
+Delete '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk'")  
 
 # Include the CPack module
 include(CPack) # has to be after shortcuts instructions are set, otherwise the shortcuts won't be created

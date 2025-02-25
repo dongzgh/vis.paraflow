@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 
 # Set the project variables.
 project(visParaflow)
-set(PRODUCT ${CMAKE_PROJECT_NAME})
 set(VERSION 1.0.0)
 set(DESCRIPTION "A workflow modeling and script generation tool.")
 set(AUTHOR "Dong Zhao")
 
 # Set C++ standard.
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 # Set automoc and other Qt specific flags.
 set(CMAKE_AUTOMOC ON)
@@ -38,6 +37,9 @@ find_package(Qt6 COMPONENTS Core Widgets Svg REQUIRED)
 file(GLOB Header_FILES "include/*.h")
 file(GLOB Implementation_FILES "src/*.cpp")
 
+# Set up standard qt project.
+qt_standard_project_setup()
+
 # Add the resource file
 qt_add_resources(RESOURCES "res/resources.qrc")
 
@@ -52,7 +54,7 @@ if (APPLE)
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         MACOSX_BUNDLE
         ${Implementation_FILES}
         ${Header_FILES}
@@ -65,16 +67,16 @@ if (APPLE)
     set_source_files_properties(${MACOSX_BUNDLE_ICON_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
     # Set the bundle Info.plist
-    set_target_properties(${PRODUCT} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
+    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
 
     # Include icon in the bundle
-    target_sources(${PRODUCT} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
+    target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
 
 elseif (UNIX)
     message(STATUS "Building on Unix")
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
@@ -86,7 +88,7 @@ elseif (WIN32)
     set(RESOURCE_WIN32 "res/resources.rc")
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         WIN32
         ${Implementation_FILES}
         ${Header_FILES}
@@ -95,23 +97,8 @@ elseif (WIN32)
     )
 endif()
 
-# Check build type.
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Building in Debug mode")
-    target_compile_definitions(${PRODUCT} PRIVATE DEBUG)
-elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
-    message(STATUS "Building in Release with Debug Info mode")
-    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
-elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
-    message(STATUS "Building in Release mode")
-    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
-else()
-    message(STATUS "Building in MinSizeRel mode")
-    target_compile_definitions(${PRODUCT} PRIVATE NDEBUG)
-endif()
-
 # Set link libraries.
-target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
+target_link_libraries(${CMAKE_PROJECT_NAME} Qt6::Core Qt6::Widgets Qt6::Svg)
 
 # Set CPack targets.
 if (APPLE)
