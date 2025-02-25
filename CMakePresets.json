@@ -1,16 +1,21 @@
 {
   "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 10,
+    "patch": 0
+  },
   "configurePresets": [
     {
       "hidden": true,
-      "name": "(macOS) Qt",
+      "name": "(macOS) Default",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/macos"
       }
     },
     {
       "name": "(macOS) Debug",
-      "inherits": "(macOS) Qt",
+      "inherits": "(macOS) Default",
       "description": "Build with debug information",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/debug",
@@ -20,7 +25,7 @@
     },
     {
       "name": "(macOS) Release",
-      "inherits": "(macOS) Qt",
+      "inherits": "(macOS) Default",
       "description": "Build with release optimization",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/release",
@@ -30,14 +35,41 @@
     },
     {
       "hidden": true,
-      "name": "(Windows) Qt",
+      "name": "(Linux) Default",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/gcc_64"
+      }
+    },
+    {
+      "name": "(Linux) Debug",
+      "inherits": "(Linux) Default",
+      "description": "Build with debug information",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "(Linux) Release",
+      "inherits": "(Linux) Default",
+      "description": "Build with release optimization",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "hidden": true,
+      "name": "(Windows) Default",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "C:/Qt/6.5.1/msvc2019_64"
       }
     },
     {
       "name": "(Windows) Debug",
-      "inherits": "(Windows) Qt",
+      "inherits": "(Windows) Default",
       "description": "Build with debug information",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/debug",
@@ -48,44 +80,40 @@
     },
     {
       "name": "(Windows) Release",
-      "inherits": "(Windows) Qt",
+      "inherits": "(Windows) Default",
       "description": "Build with release optimization",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-      }
-    },
-    {
-      "hidden": true,
-      "name": "(Linux) Qt",
-      "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/gcc_64"
-      }
-    },
-    {
-      "name": "(Linux) Debug",
-      "inherits": "(Linux) Qt",
-      "description": "Build with debug information",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/debug",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "(Linux) Release",
-      "inherits": "(Linux) Qt",
-      "description": "Build with release optimization",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/release",
-      "cacheVariables": {
+      },
+      "environment": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     }
   ],
   "buildPresets": [
+    {
+      "name": "(macOS) Debug",
+      "configurePreset": "(macOS) Debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "(macOS) Release",
+      "configurePreset": "(macOS) Release",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "(Linux) Debug",
+      "configurePreset": "(Linux) Debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "(Linux) Release",
+      "configurePreset": "(Linux) Release",
+      "configuration": "RelWithDebInfo"
+    },
     {
       "name": "(Windows) Debug",
       "configurePreset": "(Windows) Debug",
