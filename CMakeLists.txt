@@ -2,20 +2,13 @@ cmake_minimum_required(VERSION 3.16)
 
 # Set the project variables.
 project(visParaflow)
+set(PRODUCT ${CMAKE_PROJECT_NAME})
 set(VERSION 1.0.0)
 set(DESCRIPTION "A workflow modeling and script generation tool.")
 set(AUTHOR "Dong Zhao")
 
 # Set C++ standard.
 set(CMAKE_CXX_STANDARD 20)
-
-# Set automoc and other Qt specific flags.
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-# Set include directories.
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Set the output directory for the build executables and libraries.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -30,12 +23,16 @@ foreach(CONFIGURATION ${CMAKE_CONFIGURATION_TYPES})
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIGURATION_UPPER} ${CMAKE_BINARY_DIR}/lib)
 endforeach()
 
+# Set include directories.
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 # Find Qt6 component for Regular Expression.
 find_package(Qt6 COMPONENTS Core Widgets Svg REQUIRED)
 
-# Collect the source files.
-file(GLOB Header_FILES "include/*.h")
-file(GLOB Implementation_FILES "src/*.cpp")
+# Set automoc and other Qt specific flags.
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 # Set up standard qt project.
 qt_standard_project_setup()
@@ -43,7 +40,26 @@ qt_standard_project_setup()
 # Add the resource file
 qt_add_resources(RESOURCES "res/resources.qrc")
 
-if (APPLE)
+# Collect the source files.
+file(GLOB Header_FILES "include/*.h")
+file(GLOB Implementation_FILES "src/*.cpp")
+
+# Set the executable target.
+if (WIN32)
+    message(STATUS "Building on Windows")
+
+    # Set windows specific resources.
+    set(RESOURCE_WIN32 "res/resources.rc")
+
+    # Add the executable target.
+    add_executable(${PRODUCT}
+        WIN32
+        ${Implementation_FILES}
+        ${Header_FILES}
+        ${RESOURCES}
+        ${RESOURCE_WIN32}
+    )
+elseif (APPLE)
     message(STATUS "Building on macOS")
 
     # Set macOS specific resources.
@@ -54,7 +70,7 @@ if (APPLE)
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
 
     # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
+    add_executable(${PRODUCT}
         MACOSX_BUNDLE
         ${Implementation_FILES}
         ${Header_FILES}
@@ -67,44 +83,38 @@ if (APPLE)
     set_source_files_properties(${MACOSX_BUNDLE_ICON_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
     # Set the bundle Info.plist
-    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
+    set_target_properties(${PRODUCT} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
 
     # Include icon in the bundle
-    target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
-
+    target_sources(${PRODUCT} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
 elseif (UNIX)
     message(STATUS "Building on Unix")
 
     # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
+    add_executable(${PRODUCT}
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
-    )
-elseif (WIN32)
-    message(STATUS "Building on Windows")
-
-    # Set windows specific resources.
-    set(RESOURCE_WIN32 "res/resources.rc")
-
-    # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
-        WIN32
-        ${Implementation_FILES}
-        ${Header_FILES}
-        ${RESOURCES}
-        ${RESOURCE_WIN32}
     )
 endif()
 
 # Set link libraries.
-target_link_libraries(${CMAKE_PROJECT_NAME} Qt6::Core Qt6::Widgets Qt6::Svg)
+target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
+
+# Set deployment script.
+set(DEPLOY_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/deploy.cmake")
+file(WRITE ${DEPLOY_SCRIPT} "include(\"${QT_DEPLOY_SUPPORT}\")
+qt_deploy_runtime_dependencies(
+    EXECUTABLE \"\${QT_DEPLOY_BIN_DIR}/$<TARGET_FILE_NAME:${PRODUCT}}>\"
+)")
+
+install(SCRIPT ${DEPLOY_SCRIPT})
 
 # Set CPack targets.
-if (APPLE)
+if (WIN32)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/windows)
+elseif (APPLE)
     add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/macos)
 elseif (UNIX)
     add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/linux)
-elseif (WIN32)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/windows)
 endif()

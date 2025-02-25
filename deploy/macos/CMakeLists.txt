@@ -2,7 +2,7 @@
 include(InstallRequiredSystemLibraries)
 
 # Set the CPack variables.
-set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
+set(CPACK_PACKAGE_NAME ${PRODUCT})
 set(CPACK_PACKAGE_VERSION ${VERSION})
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
@@ -19,4 +19,4 @@ set(CPACK_GENERATOR DragNDrop)
 include(CPack)
 
 # Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_PROJECT_NAME}.app" DESTINATION /Applications)
+install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PRODUCT}.app" DESTINATION /Applications)
