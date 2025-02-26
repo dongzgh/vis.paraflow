@@ -8,7 +8,7 @@
 !define PUBLISHER_NAME "visParaflow"
 
 # Name of the installer
-Outfile "${PROGRAM_NAME}-${VERSION}.exe"
+Outfile "${PROGRAM_NAME}-${PROGRAM_VERSION}.exe"
 
 # Set the installer icon
 Icon ".\app.ico"
@@ -18,7 +18,7 @@ UninstallIcon ".\app.ico"
 InstallDir $PROGRAMFILES64\${PROGRAM_NAME}
 
 # Use registry key to remember the installation directory
-InstallDirRegKey HKCU "Software\${PROGRAM_NAME}\${VERSION}" "Install_Dir"
+InstallDirRegKey HKCU "Software\${PROGRAM_NAME}\${PROGRAM_VERSION}" "Install_Dir"
 
 # Page settings
 Page directory
@@ -33,7 +33,7 @@ Section "Install"
   File /r /x "*.pdb" "..\..\build\release\bin\*.*"
 
   # Write the installation path to the registry
-  WriteRegStr HKCU "Software\${PROGRAM_NAME}\${VERSION}" "Install_Dir" "$INSTDIR"
+  WriteRegStr HKCU "Software\${PROGRAM_NAME}\${PROGRAM_VERSION}" "Install_Dir" "$INSTDIR"
 
   # Create a shortcut in the Start Programs menu
   CreateShortCut "$SMPROGRAMS\${PROGRAM_NAME}.lnk" "$INSTDIR\${PROGRAM_NAME}.exe"
@@ -42,7 +42,7 @@ Section "Install"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayName" "${PROGRAM_NAME}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "UninstallString" "$INSTDIR\uninstall.exe"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "InstallLocation" "$INSTDIR"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayVersion" "${VERSION}"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayVersion" "${PROGRAM_VERSION}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "Publisher" "${PUBLISHER_NAME}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "DisplayIcon" "$INSTDIR\${PROGRAM_NAME}.exe"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}" "NoModify" 1
@@ -58,7 +58,7 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\${PROGRAM_NAME}.lnk"
 
   # Remove the registry entries
-  DeleteRegKey HKCU "Software\${PROGRAM_NAME}\${VERSION}"
+  DeleteRegKey HKCU "Software\${PROGRAM_NAME}\${PROGRAM_VERSION}"
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PROGRAM_NAME}"
 
   # Remove the installation directory
