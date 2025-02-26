@@ -1,8 +1,8 @@
-# Define version variable
-!define VERSION "1.0.0"
-
 # Define program name variable
 !define PROGRAM_NAME "visParaflow"
+
+# Define version variable
+!define VERSION "1.0.0"
 
 # Define publisher name variable
 !define PUBLISHER_NAME "visParaflow"
@@ -30,7 +30,7 @@ Section "Install"
   SetOutPath $INSTDIR
 
   # Include files to be installed
-  File /r /x "*.pdb" "..\..\build\release\bin\*.*"
+  File /r /x "*.pdb" "..\..\build\release\install\*.*"
 
   # Write the installation path to the registry
   WriteRegStr HKCU "Software\${PROGRAM_NAME}\${PROGRAM_VERSION}" "Install_Dir" "$INSTDIR"

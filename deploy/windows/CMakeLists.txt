@@ -4,9 +4,6 @@ include(InstallRequiredSystemLibraries)
 # Set the CPack variables.
 set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
-set(CPACK_PACKAGE_VERSION_MAJOR 1)
-set(CPACK_PACKAGE_VERSION_MINOR 0)
-set(CPACK_PACKAGE_VERSION_PATCH 0)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
@@ -45,6 +42,6 @@ Delete '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk'")
 include(CPack) # has to be after shortcuts instructions are set, otherwise the shortcuts won't be created
 
 # Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/"
+install(DIRECTORY "${CMAKE_INSTALL_PREFIX}/"
   DESTINATION /
   FILES_MATCHING PATTERN * PATTERN *.pdb EXCLUDE)
