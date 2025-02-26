@@ -1,24 +1,27 @@
-# Include the InstallRequiredSystemLibraries module.
-include(InstallRequiredSystemLibraries)
+# # Include the InstallRequiredSystemLibraries module.
+# include(InstallRequiredSystemLibraries)
+
+# set(CPACK_INSTALL_PREFIX /)
+# set(CPACK_PACKAGING_INSTALL_PREFIX /)
+# set(CMAKE_INSTALL_LOCAL_ONLY OFF CACHE BOOL "Local install only" FORCE)
 
 # Set the CPack variables.
 set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
-set(CPACK_PACKAGE_VENDOR ${CMAKE_PROJECT_NAME})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${CMAKE_PROJECT_DESCRIPTION})
+set(CPACK_PACKAGE_VENDOR ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
-set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_PROJECT_NAME})
-set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/deploy/windows")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CPACK_PACKAGE_NAME})
 
 # Set the CPack generator to NSIS.
 set(CPACK_GENERATOR NSIS)
 
 # Set the CPack variables for the NSIS package.
-set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/deploy/windows/app.ico")
-set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/deploy/windows/app.ico")
+set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/package/windows/app.ico")
+set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/package/windows/app.ico")
 set(CPACK_NSIS_DISPLAY_NAME ${CPACK_PACKAGE_NAME})
 set(CPACK_NSIS_IGNORE_LICENSE_PAGE ON)
-set(CPACK_NSIS_INSTALLED_ICON_NAME ${CMAKE_PROJECT_NAME}.exe)
+set(CPACK_NSIS_INSTALLED_ICON_NAME ${CPACK_PACKAGE_NAME}.exe)
 
 # Get user public desktop directory
 string(REPLACE "\\" "\\\\" PDESKTOP "$ENV{PUBLIC}\\Desktop")
@@ -40,8 +43,3 @@ Delete '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk'")
 
 # Include the CPack module
 include(CPack) # has to be after shortcuts instructions are set, otherwise the shortcuts won't be created
-
-# Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_INSTALL_PREFIX}/"
-  DESTINATION /
-  FILES_MATCHING PATTERN * PATTERN *.pdb EXCLUDE)

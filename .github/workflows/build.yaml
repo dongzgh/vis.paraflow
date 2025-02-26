@@ -58,7 +58,7 @@ jobs:
       - name: Build
         run: cmake --build build
 
-  build-linux:
+  build-ubuntu:
     runs-on: ubuntu-latest
 
     steps:

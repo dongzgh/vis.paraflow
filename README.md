@@ -52,14 +52,14 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 - Open `make-app.sh` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Run Shell Script` from the drop down list
-- `DMG` package is created in the `deploy/macos` folder
+- `DMG` package is created in the `package/macos` folder
 
 #### Using `cpack`
 
 - Open terminal in the `build/release` directory
 - Run `macdeployqt6 visParaflow.app`
 - Run `cpack`
-- `DMG` package is created in the `deploy/macos` folder
+- `DMG` package is created in the `package/macos` folder
 
 ### Linux
 
@@ -68,13 +68,13 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 - Open `make-app.sh` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Run Shell Script` from the drop down list
-- `DEBIAN` package is created in the `deploy/linux` folder
+- `DEBIAN` package is created in the `package/ubuntu` folder
 
 #### Using `cpack`
 
 - Open terminal in the `build/release` directory
 - Run `cpack`
-- `DEBIAN` package is created in the `deploy/linux` folder
+- `DEBIAN` package is created in the `package/ubuntu` folder
 
 #### Notes
 
@@ -106,16 +106,16 @@ windeployqt6 <path-to-your-executable>
 
 #### Using `make-app.nsi`
 
-- Open `deploy/windows/make-app.nsi` in Visual Studio Code
+- Open `package/windows/make-app.nsi` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Build NSIS Script` from the drop down list
-- `NSIS` installer is created in the `deploy/windows` folder
+- `NSIS` installer is created in the `package/windows` folder
 
 #### Using `cpack`
 
 - Open terminal in the `build/release` directory
 - Run `cpack`
-- `NSIS` installer is created in the `deploy/windows` folder
+- `NSIS` installer is created in the `package/windows` folder
 
 ## Prepare Data
 
