@@ -1,19 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Set the project variables.
-project(visParaflow)
-set(PRODUCT ${CMAKE_PROJECT_NAME})
-set(VERSION 1.0.0)
-set(DESCRIPTION "A workflow modeling and script generation tool.")
-set(AUTHOR "Dong Zhao")
+project(visParaflow VERSION 1.0.0 LANGUAGES CXX DESCRIPTION "A workflow modeling and script generation tool.")
 
 # Set C++ standard.
 set(CMAKE_CXX_STANDARD 20)
 
 # Set the output directory for the build executables and libraries.
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIR ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIR ${CMAKE_BINARY_DIR}/lib)
 
 # Ensure the output directory is the same for all configurations
 foreach(CONFIGURATION ${CMAKE_CONFIGURATION_TYPES})
@@ -34,15 +30,17 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-# Set up standard qt project.
-qt_standard_project_setup()
-
 # Add the resource file
 qt_add_resources(RESOURCES "res/resources.qrc")
 
 # Collect the source files.
 file(GLOB Header_FILES "include/*.h")
 file(GLOB Implementation_FILES "src/*.cpp")
+
+# Set the build type.
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
+endif()
 
 # Set the executable target.
 if (WIN32)
@@ -52,7 +50,7 @@ if (WIN32)
     set(RESOURCE_WIN32 "res/resources.rc")
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         WIN32
         ${Implementation_FILES}
         ${Header_FILES}
@@ -70,7 +68,7 @@ elseif (APPLE)
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         MACOSX_BUNDLE
         ${Implementation_FILES}
         ${Header_FILES}
@@ -83,15 +81,15 @@ elseif (APPLE)
     set_source_files_properties(${MACOSX_BUNDLE_ICON_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
     # Set the bundle Info.plist
-    set_target_properties(${PRODUCT} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
+    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
 
     # Include icon in the bundle
-    target_sources(${PRODUCT} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
+    target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
 elseif (UNIX)
     message(STATUS "Building on Unix")
 
     # Add the executable target.
-    add_executable(${PRODUCT}
+    add_executable(${CMAKE_PROJECT_NAME}
         ${Implementation_FILES}
         ${Header_FILES}
         ${RESOURCES}
@@ -99,16 +97,30 @@ elseif (UNIX)
 endif()
 
 # Set link libraries.
-target_link_libraries(${PRODUCT} Qt6::Core Qt6::Widgets Qt6::Svg)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::Svg)
 
-# Set deployment script.
-set(DEPLOY_SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/deploy.cmake")
-file(WRITE ${DEPLOY_SCRIPT} "include(\"${QT_DEPLOY_SUPPORT}\")
+# Set the install prefix.
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+
+# Install the executable target.
+install(TARGETS ${CMAKE_PROJECT_NAME}
+    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
+)
+
+# Generate a deployment script to be executed at install time
+qt_generate_deploy_script(
+    TARGET ${CMAKE_PROJECT_NAME}
+    OUTPUT_SCRIPT deploy_script
+    CONTENT "
 qt_deploy_runtime_dependencies(
-    EXECUTABLE \"\${QT_DEPLOY_BIN_DIR}/$<TARGET_FILE_NAME:${PRODUCT}}>\"
-)")
+    EXECUTABLE \"${CMAKE_RUNTIME_OUTPUT_DIR}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>\"
+    GENERATE_QT_CONF
+    BIN_DIR \"${CMAKE_INSTALL_PREFIX}/bin\"    
+    NO_TRANSLATIONS)
+")
 
-install(SCRIPT ${DEPLOY_SCRIPT})
+# Install the deployment script.
+install(SCRIPT ${deploy_script})
 
 # Set CPack targets.
 if (WIN32)

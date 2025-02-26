@@ -9,6 +9,7 @@
     {
       "hidden": true,
       "name": "(macOS) Default",
+      "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/macos"
       }
@@ -17,7 +18,6 @@
       "name": "(macOS) Debug",
       "inherits": "(macOS) Default",
       "description": "Build with debug information",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
@@ -27,7 +27,6 @@
       "name": "(macOS) Release",
       "inherits": "(macOS) Default",
       "description": "Build with release optimization",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
@@ -36,6 +35,7 @@
     {
       "hidden": true,
       "name": "(Linux) Default",
+      "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/gcc_64"
       }
@@ -44,7 +44,6 @@
       "name": "(Linux) Debug",
       "inherits": "(Linux) Default",
       "description": "Build with debug information",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug"
@@ -54,7 +53,6 @@
       "name": "(Linux) Release",
       "inherits": "(Linux) Default",
       "description": "Build with release optimization",
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
@@ -63,32 +61,29 @@
     {
       "hidden": true,
       "name": "(Windows) Default",
+      "generator": "Visual Studio 17 2022",
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "C:/Qt/6.5.1/msvc2019_64"
+        "CMAKE_PREFIX_PATH": "C:/Qt/6.5.1/msvc2019_64",
+        "CMAKE_HAVE_LIBC_PTHREAD": "0"
       }
     },
     {
       "name": "(Windows) Debug",
       "inherits": "(Windows) Default",
-      "description": "Build with debug information",
-      "generator": "Visual Studio 17 2022",
+      "description": "Build with debug information",      
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug",
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug"        
       }
     },
     {
       "name": "(Windows) Release",
       "inherits": "(Windows) Default",
       "description": "Build with release optimization",
-      "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "RelWithDebInfo",
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-      },
-      "environment": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }
     }
