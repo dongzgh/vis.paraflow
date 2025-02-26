@@ -116,7 +116,8 @@ qt_generate_deploy_script(
 qt_deploy_runtime_dependencies(
     EXECUTABLE \"${CMAKE_RUNTIME_OUTPUT_DIR}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>\"
     GENERATE_QT_CONF
-    BIN_DIR \"${CMAKE_INSTALL_PREFIX}/bin\"    
+    BIN_DIR \"${CMAKE_INSTALL_PREFIX}\" 
+    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}/plugins\"
     NO_TRANSLATIONS)
 ")
 
