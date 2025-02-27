@@ -45,6 +45,29 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 ## Deployment
 
+### Windows
+
+#### Using `make-app.nsi`
+
+- Turn on `INSTALL_ONLY` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Install`
+- Deployable is created in the `deploy/windows` folder
+- Open `package/windows/make-app.nsi` in Visual Studio Code
+- `F1` to open `Command Palette` and select `Tasks: Run Task`
+- Select `Build NSIS Script` from the drop down list
+- `NSIS` installer is created in the `setup/windows` folder
+
+#### Using `cpack`
+
+- Turn off `INSTALL_ONLY` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Run CPack`
+- Deployable is created in `setup/windows/_CPack_Packages/win64/NSIS/visParaflow-<version>`
+- `NSIS` installer is created in the `setup/windows` folder
+
 ### MacOS
 
 ### Using `make-app.sh`
@@ -93,29 +116,6 @@ tar -xvf data.tar.zst -C tmp # for zst format
 sudo dpkg -i visParaflow-<version>.deb # install
 sudo dpkg -r visParaflow-<version>.deb # uninstall
 ```
-
-### Windows
-
-- Copy all Qt dependencies to the binary directory (e.g., `bin`)
-- Locate `windeployqt6` in `<path to Qt toolset>\bin`:
-
-```shell
-# Cop all Qt dependencies over to bin folder.
-windeployqt6 <path-to-your-executable>
-```
-
-#### Using `make-app.nsi`
-
-- Open `package/windows/make-app.nsi` in Visual Studio Code
-- `F1` to open `Command Palette` and select `Tasks: Run Task`
-- Select `Build NSIS Script` from the drop down list
-- `NSIS` installer is created in the `package/windows` folder
-
-#### Using `cpack`
-
-- Open terminal in the `build/release` directory
-- Run `cpack`
-- `NSIS` installer is created in the `package/windows` folder
 
 ## Prepare Data
 
