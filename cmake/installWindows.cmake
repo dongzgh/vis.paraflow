@@ -1,5 +1,5 @@
 # Set the install prefix.
-if (INSTALL_ONLY)
+if (NOT USE_CPACK)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 else()
     set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)

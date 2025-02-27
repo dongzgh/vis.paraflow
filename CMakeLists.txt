@@ -56,7 +56,7 @@ elseif (UNIX)
 endif()
 
 # Set INSTALL option.
-set(INSTALL_ONLY ON)
+set(USE_CPACK ON)
 
 # Install the application for the target platform.
 if (WIN32)
@@ -68,7 +68,7 @@ elseif (UNIX)
 endif()
 
 # Package the application for the target platform.
-if (NOT INSTALL_ONLY)
+if (USE_CPACK)
     if (WIN32)
         include (packageWindows)
     elseif (APPLE)
