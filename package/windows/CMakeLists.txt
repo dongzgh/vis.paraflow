@@ -1,11 +1,11 @@
 # Set the CPack variables.
 set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${CMAKE_PROJECT_DESCRIPTION})
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CPACK_PACKAGE_NAME})
-set(CPACK_PACKAGE_DIRECTORY ${CMAKE_SOURCE_DIR}/setup/windows)
+set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/setup/windows")
 
 # Set the CPack generator to NSIS.
 set(CPACK_GENERATOR NSIS)
@@ -27,13 +27,13 @@ string(REPLACE "\\" "\\\\" SMPROGRAMS "$ENV{APPDATA}\\Microsoft\\Windows\\Start 
 
 # Create shortcuts
 set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
-CreateShortCut '${SMPROGRAMS}\\\\${CMAKE_PROJECT_NAME}.lnk' '$INSTDIR\\\\${CMAKE_PROJECT_NAME}.exe'
-CreateShortCut '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk' '$INSTDIR\\\\${CMAKE_PROJECT_NAME}.exe'")
+CreateShortCut '${SMPROGRAMS}\\\\${CPACK_PACKAGE_NAME}.lnk' '$INSTDIR\\\\${CPACK_PACKAGE_NAME}.exe'
+CreateShortCut '${PDESKTOP}\\\\${CPACK_PACKAGE_NAME}.lnk' '$INSTDIR\\\\${CPACK_PACKAGE_NAME}.exe'")
 
 # Delete shortcuts
 set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
-Delete '${SMPROGRAMS}\\\\${CMAKE_PROJECT_NAME}.lnk'
-Delete '${PDESKTOP}\\\\${CMAKE_PROJECT_NAME}.lnk'")  
+Delete '${SMPROGRAMS}\\\\${CPACK_PACKAGE_NAME}.lnk'
+Delete '${PDESKTOP}\\\\${CPACK_PACKAGE_NAME}.lnk'")  
 
 # Include the CPack module
 include(CPack) # has to be after shortcuts instructions are set, otherwise the shortcuts won't be created
