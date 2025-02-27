@@ -55,8 +55,8 @@ elseif (UNIX)
     include (buildUbuntu)
 endif()
 
-# Set INSTALL option.
-set(USE_CPACK ON)
+# Set USE_CPACK option.
+set(USE_CPACK OFF)
 
 # Install the application for the target platform.
 if (WIN32)
