@@ -1,5 +1,3 @@
-message(STATUS "Building on Unix")
-
 # Add the executable target.
 add_executable(${CMAKE_PROJECT_NAME}
     ${Implementation_FILES}

@@ -1,5 +1,3 @@
-message(STATUS "Building on macOS")
-
 # Set macOS specific resources.
 set(PLIST_MACOS "package/macos/Info.plist")
 set(ICNS_MACOS "package/macos/app.icns")
