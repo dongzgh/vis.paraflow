@@ -99,16 +99,23 @@ endif()
 # Set link libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::Svg)
 
+# Set INSTALL option.
+set(INSTALL_ONLY ON)
+
 # Set the install prefix.
 if(WIN32)
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+    if (INSTALL_ONLY)
+        set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+    else()
+        set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+    endif()
 elseif(APPLE)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/macos" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 elseif(UNIX)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/ubuntu" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 endif()
 
-# Install the executable target.
+# Install RUNTIME targets
 if(WIN32)
     install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
 elseif (APPLE)
@@ -118,7 +125,6 @@ elseif(UNIX)
 endif()
 
 # Install the system runtime libraries.
-# The destination of system libraries can be customized as follows
 set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 include (InstallRequiredSystemLibraries)
 install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${CMAKE_INSTALL_PREFIX}")
@@ -139,10 +145,12 @@ qt_deploy_runtime_dependencies(
 install(SCRIPT ${deploy_script})
 
 # Set package targets.
-if (WIN32)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/package/windows)
-elseif (APPLE)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/package/macos)
-elseif (UNIX)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/package/ubuntu)
+if (NOT INSTALL_ONLY)
+    if (WIN32)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/windows)
+    elseif (APPLE)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/macos)
+    elseif (UNIX)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/ubuntu)
+    endif()
 endif()
