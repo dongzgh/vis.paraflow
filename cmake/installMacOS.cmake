@@ -6,4 +6,4 @@ else()
 endif()
 
 # Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.app" DESTINATION /Applications)
+install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.app" DESTINATION "${CMAKE_INSTALL_PREFIX}/Applications")
