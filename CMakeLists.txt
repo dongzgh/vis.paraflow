@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 # Set the project variables.
 project(visParaflow VERSION 1.0.0 LANGUAGES CXX DESCRIPTION "A workflow modeling and script generation tool.")
+set(AUTHOR "Dong Zhao")
 
 # Set C++ standard.
 set(CMAKE_CXX_STANDARD 20)
@@ -54,7 +55,7 @@ elseif (UNIX)
     include (buildUbuntu)
 endif()
 
-# Set INSTALL option.
+# Set USE_CPACK option.
 set(USE_CPACK OFF)
 
 # Install the application for the target platform.

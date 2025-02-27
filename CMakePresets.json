@@ -34,15 +34,15 @@
     },
     {
       "hidden": true,
-      "name": "(Linux) Default",
+      "name": "(Ubuntu) Default",
       "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/gcc_64"
       }
     },
     {
-      "name": "(Linux) Debug",
-      "inherits": "(Linux) Default",
+      "name": "(Ubuntu) Debug",
+      "inherits": "(Ubuntu) Default",
       "description": "Build with debug information",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
@@ -50,8 +50,8 @@
       }
     },
     {
-      "name": "(Linux) Release",
-      "inherits": "(Linux) Default",
+      "name": "(Ubuntu) Release",
+      "inherits": "(Ubuntu) Default",
       "description": "Build with release optimization",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
@@ -100,13 +100,13 @@
       "configuration": "RelWithDebInfo"
     },
     {
-      "name": "(Linux) Debug",
-      "configurePreset": "(Linux) Debug",
+      "name": "(Ubuntu) Debug",
+      "configurePreset": "(Ubuntu) Debug",
       "configuration": "Debug"
     },
     {
-      "name": "(Linux) Release",
-      "configurePreset": "(Linux) Release",
+      "name": "(Ubuntu) Release",
+      "configurePreset": "(Ubuntu) Release",
       "configuration": "RelWithDebInfo"
     },
     {
