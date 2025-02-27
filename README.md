@@ -49,7 +49,7 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `make-app.nsi`
 
-- Turn on `INSTALL_ONLY` variable in `CMakeLists.txt`
+- Turn off `USE_CPACK` variable in `CMakeLists.txt`
 - `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
 - `F1` to open `Command Palette` and select `CMake: Clean Build`
 - `F1` to open `Command Palette` and select `CMake: Install`
@@ -61,7 +61,7 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `cpack`
 
-- Turn off `INSTALL_ONLY` variable in `CMakeLists.txt`
+- Turn on `USE_CPACK` variable in `CMakeLists.txt`
 - `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
 - `F1` to open `Command Palette` and select `CMake: Clean Build`
 - `F1` to open `Command Palette` and select `CMake: Run CPack`
@@ -88,16 +88,24 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `make-app.sh`
 
-- Open `make-app.sh` in Visual Studio Code
+- Turn off `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Install`
+- Deployable is created in the `deploy/ubuntu` folder
+- Open `package/ubuntu/make-app.sh` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Run Shell Script` from the drop down list
-- `DEBIAN` package is created in the `package/ubuntu` folder
+- `DEBIAN` package is created in the `setup/ubuntu` folder
 
 #### Using `cpack`
 
-- Open terminal in the `build/release` directory
-- Run `cpack`
-- `DEBIAN` package is created in the `package/ubuntu` folder
+- Turn on `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Run CPack`
+- Deployable is created in `setup/ubuntu/_CPack_Packages/Linux/DEB/visParaflow-<version>`
+- `DEBIAN` package is created in the `setup/ubuntu` folder
 
 #### Notes
 
