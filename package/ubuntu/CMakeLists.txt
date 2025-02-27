@@ -7,7 +7,7 @@ set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
 set(CPACK_PACKAGE_VENDOR ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
-set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/deploy/linux")
+set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/package/ubuntu")
 
 # Set the CPack generator to DEB.
 set(CPACK_GENERATOR DEB)
@@ -17,9 +17,9 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.27)")
 set(CPACK_DEBIAN_PACKAGE_SECTION utils)
 set(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
-"${CMAKE_SOURCE_DIR}/deploy/linux/debian/control"
-"${CMAKE_SOURCE_DIR}/deploy/linux/debian/postinst"
-"${CMAKE_SOURCE_DIR}/deploy/linux/debian/postrm")
+"${CMAKE_SOURCE_DIR}/package/ubuntu/debian/control"
+"${CMAKE_SOURCE_DIR}/package/ubuntu/debian/postinst"
+"${CMAKE_SOURCE_DIR}/package/ubuntu/debian/postrm")
 
 # Include the CPack module.
 include(CPack)
@@ -43,8 +43,8 @@ install(DIRECTORY "${Qt6_PLUGINS_DIR}/platforms" DESTINATION /opt/${CMAKE_PROJEC
 # Install app script file
 # Cope app stript file directly to usr/local/bin sometimes run into permission issues,
 # so we copy it to /opt/${CMAKE_PROJECT_NAME} first
-install(PROGRAMS "${CMAKE_SOURCE_DIR}/deploy/linux/app.sh" DESTINATION /opt/${CMAKE_PROJECT_NAME}/)
+install(PROGRAMS "${CMAKE_SOURCE_DIR}/package/ubuntu/app.sh" DESTINATION /opt/${CMAKE_PROJECT_NAME}/)
 
 # Install app desktop and icon file
-install(FILES "${CMAKE_SOURCE_DIR}/deploy/linux/app.desktop" DESTINATION /usr/share/applications/ RENAME ${CMAKE_PROJECT_NAME}.desktop)
-install(FILES "${CMAKE_SOURCE_DIR}/deploy/linux/app.svg" DESTINATION /usr/share/icons/hicolor/48x48/apps/ RENAME ${CMAKE_PROJECT_NAME}.svg)
+install(FILES "${CMAKE_SOURCE_DIR}/package/ubuntu/app.desktop" DESTINATION /usr/share/applications/ RENAME ${CMAKE_PROJECT_NAME}.desktop)
+install(FILES "${CMAKE_SOURCE_DIR}/package/ubuntu/app.svg" DESTINATION /usr/share/icons/hicolor/48x48/apps/ RENAME ${CMAKE_PROJECT_NAME}.svg)

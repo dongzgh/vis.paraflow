@@ -16,11 +16,15 @@ CMakeUserPresets.json
 
 # Application specific
 .DS_Store
-build/
 .env/
+build/
 app/
+deploy/
+setup/
+
+_CPack_Packages/
+
 *.app
 *.dmg
 *.dep
 *.exe
-_CPack_Packages/

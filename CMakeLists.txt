@@ -61,8 +61,8 @@ elseif (APPLE)
     message(STATUS "Building on macOS")
 
     # Set macOS specific resources.
-    set(PLIST_MACOS "deploy/macos/Info.plist")
-    set(ICNS_MACOS "deploy/macos/app.icns")
+    set(PLIST_MACOS "package/macos/Info.plist")
+    set(ICNS_MACOS "package/macos/app.icns")
 
     # Set the bundle properties.
     set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
@@ -99,36 +99,58 @@ endif()
 # Set link libraries.
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::Svg)
 
+# Set INSTALL option.
+set(INSTALL_ONLY ON)
+
 # Set the install prefix.
-set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+if(WIN32)
+    if (INSTALL_ONLY)
+        set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+    else()
+        set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+    endif()
+elseif(APPLE)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/macos" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+elseif(UNIX)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/ubuntu" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
+endif()
 
-# Install the executable target.
-install(TARGETS ${CMAKE_PROJECT_NAME}
-    BUNDLE DESTINATION "${CMAKE_INSTALL_PREFIX}"
-    RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
-)
+# Install RUNTIME targets
+if(WIN32)
+    install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
+elseif (APPLE)
+    install(TARGETS ${CMAKE_PROJECT_NAME} BUNDLE DESTINATION "${CMAKE_INSTALL_PREFIX}")
+elseif(UNIX)
+    install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
+endif()
 
-# Generate a deployment script to be executed at install time
+# Install the system runtime libraries.
+set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
+include (InstallRequiredSystemLibraries)
+install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${CMAKE_INSTALL_PREFIX}")
+
+# Generate a Qt deployment script to be executed at install time.
 qt_generate_deploy_script(
     TARGET ${CMAKE_PROJECT_NAME}
     OUTPUT_SCRIPT deploy_script
     CONTENT "
 qt_deploy_runtime_dependencies(
     EXECUTABLE \"${CMAKE_RUNTIME_OUTPUT_DIR}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>\"
-    GENERATE_QT_CONF
     BIN_DIR \"${CMAKE_INSTALL_PREFIX}\" 
-    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}/plugins\"
+    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}\"
     NO_TRANSLATIONS)
 ")
 
-# Install the deployment script.
+# Install the Qt deployment script.
 install(SCRIPT ${deploy_script})
 
-# Set CPack targets.
-if (WIN32)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/windows)
-elseif (APPLE)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/macos)
-elseif (UNIX)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/deploy/linux)
+# Set package targets.
+if (NOT INSTALL_ONLY)
+    if (WIN32)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/windows)
+    elseif (APPLE)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/macos)
+    elseif (UNIX)
+        add_subdirectory(${CMAKE_SOURCE_DIR}/package/ubuntu)
+    endif()
 endif()

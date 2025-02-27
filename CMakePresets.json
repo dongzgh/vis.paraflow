@@ -70,11 +70,11 @@
     {
       "name": "(Windows) Debug",
       "inherits": "(Windows) Default",
-      "description": "Build with debug information",      
+      "description": "Build with debug information",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug",
-        "CMAKE_BUILD_TYPE": "Debug"        
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
