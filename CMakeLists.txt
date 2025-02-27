@@ -56,7 +56,7 @@ elseif (UNIX)
 endif()
 
 # Set INSTALL option.
-set(INSTALL_ONLY OFF)
+set(INSTALL_ONLY ON)
 
 # Install the application for the target platform.
 if (WIN32)
