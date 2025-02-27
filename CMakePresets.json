@@ -8,15 +8,15 @@
   "configurePresets": [
     {
       "hidden": true,
-      "name": "(macOS) Default",
+      "name": "(MacOS) Default",
       "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_PREFIX_PATH": "/opt/Qt/6.8.1/macos"
       }
     },
     {
-      "name": "(macOS) Debug",
-      "inherits": "(macOS) Default",
+      "name": "(MacOS) Debug",
+      "inherits": "(MacOS) Default",
       "description": "Build with debug information",
       "binaryDir": "${sourceDir}/build/debug",
       "cacheVariables": {
@@ -24,8 +24,8 @@
       }
     },
     {
-      "name": "(macOS) Release",
-      "inherits": "(macOS) Default",
+      "name": "(MacOS) Release",
+      "inherits": "(MacOS) Default",
       "description": "Build with release optimization",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
@@ -90,13 +90,13 @@
   ],
   "buildPresets": [
     {
-      "name": "(macOS) Debug",
-      "configurePreset": "(macOS) Debug",
+      "name": "(MacOS) Debug",
+      "configurePreset": "(MacOS) Debug",
       "configuration": "Debug"
     },
     {
-      "name": "(macOS) Release",
-      "configurePreset": "(macOS) Release",
+      "name": "(MacOS) Release",
+      "configurePreset": "(MacOS) Release",
       "configuration": "RelWithDebInfo"
     },
     {
