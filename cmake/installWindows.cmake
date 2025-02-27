@@ -1,5 +1,5 @@
 # Set the install prefix.
-if (INSTALL_ONLY)
+if (NOT USE_CPACK)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 else()
     set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
@@ -21,7 +21,7 @@ qt_generate_deploy_script(
 qt_deploy_runtime_dependencies(
     EXECUTABLE \"${CMAKE_RUNTIME_OUTPUT_DIR}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>\"
     BIN_DIR \"${CMAKE_INSTALL_PREFIX}\" 
-    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}\"
+    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}\" 
     NO_TRANSLATIONS)
 ")
 
