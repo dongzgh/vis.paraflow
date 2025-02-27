@@ -1,6 +1,6 @@
 # visParaflow
 
-**visParaflow** is a powerful and versatile workflow modeler designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
+**visParaflow** is a powerful and versatile workflow modeler and script generator designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
 
 ![Main Window](/res/capture-main-window.png)
 
@@ -27,8 +27,8 @@ cmake --list-presets=all
   "(macOS) Release"
   "(Windows) Debug"
   "(Windows) Release"
-  "(Linux) Debug"
-  "(Linux) Release"
+  "(Ubuntu) Debug"
+  "(Ubuntu) Release"
 
 # Cconfigure project.
 cmake --preset "(macOS) Debug" # based on the platform and configuration
@@ -40,7 +40,7 @@ cmake --build .
 
 # Run the program.
 cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
-./visParaflow # on windows: visParaflow
+./visParaflow # on windows: visParaflow.exe
 ```
 
 ## Deployment
