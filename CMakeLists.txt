@@ -42,115 +42,37 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
 endif()
 
-# Set the executable target.
+# Append local module path.
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+
+# Build the application for the target platform.
 if (WIN32)
-    message(STATUS "Building on Windows")
-
-    # Set windows specific resources.
-    set(RESOURCE_WIN32 "res/resources.rc")
-
-    # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
-        WIN32
-        ${Implementation_FILES}
-        ${Header_FILES}
-        ${RESOURCES}
-        ${RESOURCE_WIN32}
-    )
+    include (buildWindows)
 elseif (APPLE)
-    message(STATUS "Building on macOS")
-
-    # Set macOS specific resources.
-    set(PLIST_MACOS "package/macos/Info.plist")
-    set(ICNS_MACOS "package/macos/app.icns")
-
-    # Set the bundle properties.
-    set(CMAKE_MACOSX_BUNDLE TRUE)  # Enable macOS app bundle creation
-
-    # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
-        MACOSX_BUNDLE
-        ${Implementation_FILES}
-        ${Header_FILES}
-        ${RESOURCES}
-        ${ICNS_MACOS}
-    )
-
-    # Set the bundle icon
-    set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/${ICNS_MACOS}")
-    set_source_files_properties(${MACOSX_BUNDLE_ICON_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-
-    # Set the bundle Info.plist
-    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/${PLIST_MACOS}")
-
-    # Include icon in the bundle
-    target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MACOSX_BUNDLE_ICON_FILE})
+    include (buildMacOS)
 elseif (UNIX)
-    message(STATUS "Building on Unix")
-
-    # Add the executable target.
-    add_executable(${CMAKE_PROJECT_NAME}
-        ${Implementation_FILES}
-        ${Header_FILES}
-        ${RESOURCES}
-    )
+    include (buildUbuntu)
 endif()
-
-# Set link libraries.
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets Qt6::Svg)
 
 # Set INSTALL option.
-set(INSTALL_ONLY ON)
+set(INSTALL_ONLY OFF)
 
-# Set the install prefix.
-if(WIN32)
-    if (INSTALL_ONLY)
-        set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/windows" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
-    else()
-        set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
-    endif()
-elseif(APPLE)
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/macos" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
-elseif(UNIX)
-    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/deploy/ubuntu" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
-endif()
-
-# Install RUNTIME targets
-if(WIN32)
-    install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
+# Install the application for the target platform.
+if (WIN32)
+    include (installWindows)
 elseif (APPLE)
-    install(TARGETS ${CMAKE_PROJECT_NAME} BUNDLE DESTINATION "${CMAKE_INSTALL_PREFIX}")
-elseif(UNIX)
-    install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
+    include (installMacOS)
+elseif (UNIX)
+    include (installUbuntu)
 endif()
 
-# Install the system runtime libraries.
-set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
-include (InstallRequiredSystemLibraries)
-install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${CMAKE_INSTALL_PREFIX}")
-
-# Generate a Qt deployment script to be executed at install time.
-qt_generate_deploy_script(
-    TARGET ${CMAKE_PROJECT_NAME}
-    OUTPUT_SCRIPT deploy_script
-    CONTENT "
-qt_deploy_runtime_dependencies(
-    EXECUTABLE \"${CMAKE_RUNTIME_OUTPUT_DIR}/$<TARGET_FILE_NAME:${CMAKE_PROJECT_NAME}>\"
-    BIN_DIR \"${CMAKE_INSTALL_PREFIX}\" 
-    PLUGINS_DIR \"${CMAKE_INSTALL_PREFIX}\"
-    NO_TRANSLATIONS)
-")
-
-# Install the Qt deployment script.
-install(SCRIPT ${deploy_script})
-
-# Set package targets.
+# Package the application for the target platform.
 if (NOT INSTALL_ONLY)
     if (WIN32)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/package/windows)
+        include (packageWindows)
     elseif (APPLE)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/package/macos)
+        include (packageMacOS)
     elseif (UNIX)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/package/ubuntu)
+        include (packageUbuntu)
     endif()
 endif()
