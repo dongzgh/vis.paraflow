@@ -14,6 +14,3 @@ set(CPACK_GENERATOR DragNDrop)
 
 # Include the CPack module.
 include(CPack)
-
-# Install the executable to the temporary directory
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.app" DESTINATION /Applications)
