@@ -5,15 +5,15 @@ else()
     set(CMAKE_INSTALL_PREFIX "." CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 endif()
 
-# Install RUNTIME targets
+# Install target RUNTIME.
 install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
 
-# Install the system runtime libraries.
+# Install system RUNTIME dependencies.
 set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 include (InstallRequiredSystemLibraries)
 install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${CMAKE_INSTALL_PREFIX}")
 
-# Generate a Qt deployment script to be executed at install time.
+# Generarte script to install Qt RUNTIME dependencies.
 qt_generate_deploy_script(
     TARGET ${CMAKE_PROJECT_NAME}
     OUTPUT_SCRIPT deploy_script
@@ -25,5 +25,5 @@ qt_deploy_runtime_dependencies(
     NO_TRANSLATIONS)
 ")
 
-# Install the Qt deployment script.
+# Install Qt deployment script.
 install(SCRIPT ${deploy_script})

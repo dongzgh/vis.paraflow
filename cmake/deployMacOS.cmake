@@ -5,5 +5,5 @@ else()
     set(CMAKE_INSTALL_PREFIX "" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 endif()
 
-# Install the executable to the temporary directory
+# Install target RUNTIME.
 install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.app" DESTINATION "${CMAKE_INSTALL_PREFIX}/Applications")
