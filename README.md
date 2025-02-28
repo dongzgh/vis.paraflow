@@ -1,6 +1,6 @@
 # visParaflow
 
-**visParaflow** is a powerful and versatile workflow modeler designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
+**visParaflow** is a powerful and versatile workflow modeler and script generator designed to streamline and automate your processes. It is cross-platform, supporting Windows, macOS, and Linux, ensuring that you can use it on any operating system of your choice.
 
 ![Main Window](/res/capture-main-window.png)
 
@@ -27,8 +27,8 @@ cmake --list-presets=all
   "(macOS) Release"
   "(Windows) Debug"
   "(Windows) Release"
-  "(Linux) Debug"
-  "(Linux) Release"
+  "(Ubuntu) Debug"
+  "(Ubuntu) Release"
 
 # Cconfigure project.
 cmake --preset "(macOS) Debug" # based on the platform and configuration
@@ -40,7 +40,7 @@ cmake --build .
 
 # Run the program.
 cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
-./visParaflow # on windows: visParaflow
+./visParaflow # on windows: visParaflow.exe
 ```
 
 ## Deployment
@@ -49,7 +49,7 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `make-app.nsi`
 
-- Turn on `INSTALL_ONLY` variable in `CMakeLists.txt`
+- Turn off `USE_CPACK` variable in `CMakeLists.txt`
 - `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
 - `F1` to open `Command Palette` and select `CMake: Clean Build`
 - `F1` to open `Command Palette` and select `CMake: Install`
@@ -61,7 +61,7 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `cpack`
 
-- Turn off `INSTALL_ONLY` variable in `CMakeLists.txt`
+- Turn on `USE_CPACK` variable in `CMakeLists.txt`
 - `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
 - `F1` to open `Command Palette` and select `CMake: Clean Build`
 - `F1` to open `Command Palette` and select `CMake: Run CPack`
@@ -88,20 +88,28 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Using `make-app.sh`
 
-- Open `make-app.sh` in Visual Studio Code
+- Turn off `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Install`
+- Deployable is created in the `deploy/ubuntu` folder
+- Open `package/ubuntu/make-app.sh` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Run Shell Script` from the drop down list
-- `DEBIAN` package is created in the `package/ubuntu` folder
+- `DEBIAN` package is created in the `setup/ubuntu` folder
 
 #### Using `cpack`
 
-- Open terminal in the `build/release` directory
-- Run `cpack`
-- `DEBIAN` package is created in the `package/ubuntu` folder
+- Turn on `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Run CPack`
+- Deployable is created in `setup/ubuntu/_CPack_Packages/Linux/DEB/visParaflow-<version>`
+- `DEBIAN` package is created in the `setup/ubuntu` folder
 
 #### Notes
 
-- Use the following commands to check the `debian` package:
+- Check the `debian` package:
 
 ```bash
 ar x visParaflow-<version>.deb
@@ -110,11 +118,44 @@ tar -xzf data.tar.gz -C tmp # for gz format
 tar -xvf data.tar.zst -C tmp # for zst format
 ```
 
-- Install/uninstall the package using:
+- Install/uninstall the package:
 
 ```bash
 sudo dpkg -i visParaflow-<version>.deb # install
 sudo dpkg -r visParaflow-<version>.deb # uninstall
+```
+
+- Check and install missing libraries:
+
+```bash
+# Check missing shared libraries.
+ldd /opt/Qt/6.8.1/gcc_64/plugins/xcbglintegrations/libqxcb-egl-integration.so | grep -G "not found"
+
+# Check existing libraries.
+dpkg -l libxcb*
+dpkg -L libxcb-cursor0
+
+# Search for missing libraries.
+sudo apt search libxcb
+sudo apt-get install libxcb-cursor0
+
+## Install some common missing libraries as follows:
+# sudo apt-get install libxcb-cursor0
+# sudo apt-get install libxkbcommon-x11-0
+# sudo apt-get install libxcb-icccm4
+# sudo apt-get install libxcb-keysyms1
+# sudo apt-get install libxcb-xkb1
+
+# Check PATH settings.
+export PATH=/usr/lib:/usr/lib/x86_64-linux-gnu
+```
+
+- [Connect remote machine](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli):
+
+```bash
+ssh -i ./vm_key.pem <azureuser>@40.76.3.96
+az vm open-port --resource-group playvm --name vm --port 3389
+scp -i ./vm_key.pem ./visParaflow-<version>.deb azureuser@40.76.3.96:/home/azureuser/
 ```
 
 ## Prepare Data

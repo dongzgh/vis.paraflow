@@ -22,7 +22,7 @@ build/
 deploy/
 setup/
 
-app/
+tmp/
 _CPack_Packages/
 
 *.app

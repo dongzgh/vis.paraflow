@@ -1,5 +1,3 @@
-message(STATUS "Building on Windows")
-
 # Set windows specific resources.
 set(RESOURCE_WIN32 "res/resources.rc")
 

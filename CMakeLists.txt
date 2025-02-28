@@ -60,11 +60,11 @@ set(USE_CPACK OFF)
 
 # Install the application for the target platform.
 if (WIN32)
-    include (installWindows)
+    include (deployWindows)
 elseif (APPLE)
-    include (installMacOS)
+    include (deployMacOS)
 elseif (UNIX)
-    include (installUbuntu)
+    include (deployUbuntu)
 endif()
 
 # Package the application for the target platform.
