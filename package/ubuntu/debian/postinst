@@ -6,7 +6,7 @@ appname="visParaflow"
 appdir="/opt/$appname"
 
 # Copy the app script file to /usr/local/bin
-sudo mv $appdir/app.sh /usr/local/bin/$appname
+sudo cp $appdir/app.sh /usr/local/bin/$appname
 sudo chmod +x /usr/local/bin/$appname
 
 exit 0

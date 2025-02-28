@@ -11,7 +11,7 @@ QT_PLUGIN_PATH=/opt/$appname/plugins
 export QT_PLUGIN_PATH
 
 # Set QT_QPA_PLATFORM to xcb or wayland.
-export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM=xcb
 
 # Run the application.
 /opt/$appname/bin/$appname "$@"
