@@ -150,7 +150,7 @@ sudo apt-get install libxcb-cursor0
 export PATH=/usr/lib:/usr/lib/x86_64-linux-gnu
 ```
 
-- Connect remote machine:
+- [Connect remote machine](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli):
 
 ```bash
 ssh -i ./vm_key.pem <azureuser>@40.76.3.96
