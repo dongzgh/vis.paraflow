@@ -125,6 +125,31 @@ sudo dpkg -i visParaflow-<version>.deb # install
 sudo dpkg -r visParaflow-<version>.deb # uninstall
 ```
 
+- Check and install missing libraries using:
+
+```bash
+# Check missing shared libraries.
+ldd /opt/Qt/6.8.1/gcc_64/plugins/xcbglintegrations/libqxcb-egl-integration.so | grep -G "not found"
+
+# Check existing libraries.
+dpkg -l libxcb*
+dpkg -L libxcb-cursor0
+
+# Search for missing libraries.
+sudo apt search libxcb
+sudo apt-get install libxcb-cursor0
+
+## Install some common missing libraries as follows:
+# sudo apt-get install libxcb-cursor0
+# sudo apt-get install libxkbcommon-x11-0
+# sudo apt-get install libxcb-icccm4
+# sudo apt-get install libxcb-keysyms1
+# sudo apt-get install libxcb-xkb1
+
+# Check PATH settings.
+export PATH=/usr/lib:/usr/lib/x86_64-linux-gnu
+```
+
 ## Prepare Data
 
 ### Folder Structure
