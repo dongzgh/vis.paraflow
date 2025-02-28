@@ -56,7 +56,7 @@ elseif (UNIX)
 endif()
 
 # Set USE_CPACK option.
-set(USE_CPACK OFF)
+set(USE_CPACK ON)
 
 # Install the application for the target platform.
 if (WIN32)
