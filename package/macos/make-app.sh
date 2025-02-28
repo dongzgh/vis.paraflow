@@ -4,24 +4,25 @@
 cd "$(dirname "$0")"
 
 # Set package name.
-appname="visParaflow"
+appName="visParaflow"
 verison="1.0.0"
 
 # Define deployment directory.
-depdir="../../deploy/macos"
-if [ ! -d $depdir ]; then
+deployDir="../../deploy/macos"
+if [ ! -d $deployDir ]; then
     echo "The deployment directory does not exist."
     exit 1
 fi
 
 # Define setup directory.
-setupdir="../../setup/macos"
-mkdir -p $setupdir
+setupDir="../../setup/macos"
+mkdir -p $setupDir
 
 # Deploy app.
-macdeployqt6 $depdir/$appname.app -always-overwrite -dmg
+cd $deployDir
+macdeployqt6 $appName.app -always-overwrite -dmg
 echo "The app has been deployed."
 
 # Rename app.
-mv $depdir/$appname.dmg $setupdir/$appname-$verison.dmg
+mv $appName.dmg $setupDir/$appName-$verison.dmg
 echo "The app has been renamed."

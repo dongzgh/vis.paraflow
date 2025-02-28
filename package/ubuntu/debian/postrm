@@ -2,9 +2,9 @@
 set -e
 
 # Variables 
-appname="visParaflow"
+appName="visParaflow"
 
 # Remove the app script from /usr/local/bin
-rm -f /usr/local/bin/$appname
+rm -f /usr/local/bin/$appName
 
 exit 0

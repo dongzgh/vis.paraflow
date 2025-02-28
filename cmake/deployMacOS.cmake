@@ -5,8 +5,6 @@ else()
     set(CMAKE_INSTALL_PREFIX "" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 endif()
 
-# Install target RUNTIME.
-install(TARGETS ${CMAKE_PROJECT_NAME} BUNDLE DESTINATION "${CMAKE_INSTALL_PREFIX}/Applications/")
-
-# Install target RUNTIME dependencies.
-install(CODE "execute_process(COMMAND macdeployqt ${CMAKE_INSTALL_PREFIX}/Applications/${CMAKE_PROJECT_NAME}.app -verbose=1)")
+# Use shell script to copy the application bundle.
+# The application bundle installed by CMake can't be prorperly processed by macdeployqt6, use shell command instead.
+install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory \"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_PROJECT_NAME}.app\" \"${CMAKE_INSTALL_PREFIX}/${CMAKE_PROJECT_NAME}.app\")")
