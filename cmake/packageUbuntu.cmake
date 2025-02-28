@@ -1,4 +1,4 @@
-# Set the CPack variables.
+# Set CPack variables.
 set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
@@ -6,10 +6,10 @@ set(CPACK_PACKAGE_VENDOR ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
 set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/setup/ubuntu")
 
-# Set the CPack generator to DEB.
+# Set CPack generator to DEB.
 set(CPACK_GENERATOR DEB)
 
-# Set the CPack variables for the DEB package.
+# Set CPack variables for the DEB package.
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "${AUTHOR}")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.27)")
 set(CPACK_DEBIAN_PACKAGE_SECTION utils)
@@ -19,5 +19,5 @@ set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
 "${CMAKE_SOURCE_DIR}/package/ubuntu/debian/postinst"
 "${CMAKE_SOURCE_DIR}/package/ubuntu/debian/postrm")
 
-# Include the CPack module.
+# Include CPack module.
 include(CPack)
