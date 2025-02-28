@@ -16,9 +16,17 @@ get_target_property(Qt6_LIB_DIR Qt6::Core LOCATION)
 get_filename_component(Qt6_LIB_DIR ${Qt6_LIB_DIR} DIRECTORY)
 
 # Install Qt6 missing libraries.
+file(GLOB LIBNET "${Qt6_LIB_DIR}/libQt6Net*")
+install(FILES ${LIBNET} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
+file(GLOB LIBOPENGL "${Qt6_LIB_DIR}/libQt6OpenGL*")
+install(FILES ${LIBOPENGL} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
 file(GLOB LIBWAYLAND "${Qt6_LIB_DIR}/libQt6Wayland*")
+file(GLOB LIBEGLFS "${Qt6_LIB_DIR}/libQt6Egl*")
+install(FILES ${LIBEGLFS} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
 install(FILES ${LIBWAYLAND} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
-file(GLOB LIBXCB_FILES "${Qt6_LIB_DIR}/libQt6Xcb*")
+file(GLOB LIBWLSHELL "${Qt6_LIB_DIR}/libQt6WlShell*")
+install(FILES ${LIBWLSHELL} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
+file(GLOB LIBXCB "${Qt6_LIB_DIR}/libQt6Xcb*")
 install(FILES ${LIBXCB} DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
 
 # Get Qt6 plugins directory.
@@ -26,16 +34,16 @@ set(Qt6_PLUGINS_DIR "${Qt6_LIB_DIR}/../plugins")
 
 # Install the Qt6 plugins.
 LIST(APPEND Qt6_PLUGINS_LIST
-    "xcbglintegrations"
-    "wayland-shell-integration"
-    "wayland-graphics-integration-client"
-    "wayland-decoration-client"
-    "tls"
-    "networkinformation"
-    "imageformats"
-    "iconengines"
     "generic"
+    "iconengines"
+    "imageformats"
+    "networkinformation"
     "platforms"
+    "tls"
+    "wayland-decoration-client"
+    "wayland-graphics-integration-client"
+    "wayland-shell-integration"
+    "xcbglintegrations"
 )
 foreach(PLUGIN ${Qt6_PLUGINS_LIST})
     install(DIRECTORY "${Qt6_PLUGINS_DIR}/${PLUGIN}" 
