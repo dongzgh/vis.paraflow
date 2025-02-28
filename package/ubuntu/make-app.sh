@@ -18,32 +18,34 @@ fi
 setupdir="../../setup/ubuntu"
 mkdir -p $setupdir
 
-# Define the staging package directory
-pkgdir="app"
+# Define the staging directory
+tmpdir="app"
 
-# Delete the old staging package directory.
-rm -rf $pkgdir
-echo "The old staging package directory has been deleted."
+# Delete the old staging directory.
+rm -rf $tmpdir
+echo "The old staging directory has been deleted."
 
 # Create the destination directory
-mkdir -p $pkgdir/DEBIAN
-mkdir -p $pkgdir/opt/$appname/bin
-mkdir -p $pkgdir/usr/share/applications
-mkdir -p $pkgdir/usr/share/icons/hicolor/48x48/apps
-echo "The staging package directories have been created."
+mkdir -p $tmpdir/DEBIAN
+mkdir -p $tmpdir/opt/$appname/bin
+mkdir -p $tmpdir/opt/$appname/lib
+mkdir -p $tmpdir/opt/$appname/plugins
+mkdir -p $tmpdir/usr/share/applications
+mkdir -p $tmpdir/usr/share/icons/hicolor/48x48/apps
+echo "The staging direcotry has been created."
 
 # Copy the DEBIAN control files.
-cp -r debian/* $pkgdir/DEBIAN/
-echo "The DEBIAN control files have been copied to the staging package directory."
+cp -r debian/* $tmpdir/DEBIAN/
+echo "The DEBIAN control files have been copied to the staging directory."
 
 # Copy the deployed files.
-cp -r $depdir/* $pkgdir/
-echo "The deployed files have been copied to the staging package directory."
+cp -r $depdir/* $tmpdir/
+echo "The deployed files have been copied to the staging directory."
 
 # Create the DEBIAN package.
-dpkg-deb --build $pkgdir $setupdir/$appname-$verison.deb
+dpkg-deb --build $tmpdir $setupdir/$appname-$verison.deb
 echo "The DEBIAN package has been created."
 
-# Delete the staging package directory.
-rm -rf $pkgdir
-echo "The staging package directory has been deleted."
+# Delete the staging directory.
+rm -rf $tmpdir
+echo "The staging directory has been deleted."
