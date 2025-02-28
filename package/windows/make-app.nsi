@@ -10,7 +10,7 @@
 # Name of the installer
 Outfile "../../setup/windows/${PROGRAM_NAME}-${PROGRAM_VERSION}.exe"
 
-# Set the installer icon
+# Set installer icon
 Icon ".\app.ico"
 UninstallIcon ".\app.ico"
 
@@ -24,7 +24,7 @@ InstallDirRegKey HKCU "Software\${PROGRAM_NAME}\${PROGRAM_VERSION}" "Install_Dir
 Page directory
 Page instfiles
 
-# Section for the installation
+# Section for installation
 Section "Install"
   # Set output path to the installation directory
   SetOutPath $INSTDIR

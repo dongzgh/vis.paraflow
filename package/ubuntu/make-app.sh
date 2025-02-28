@@ -1,31 +1,31 @@
 #!/bin/bash
 
-# Set the working directory
+# Set working directory.
 cd "$(dirname "$0")"
 
-# Set the package name
+# Set package name.
 appname="visParaflow"
 verison="1.0.0"
 
-# Define the deployment directory.
+# Define deployment directory.
 depdir="../../deploy/ubuntu"
 if [ ! -d $depdir ]; then
     echo "The deployment directory does not exist."
     exit 1
 fi
 
-# Define the setup directory.
+# Define setup directory.
 setupdir="../../setup/ubuntu"
 mkdir -p $setupdir
 
-# Define the staging directory
+# Define staging directory.
 tmpdir="app"
 
-# Delete the old staging directory.
+# Delete old staging directory.
 rm -rf $tmpdir
 echo "The old staging directory has been deleted."
 
-# Create the destination directory
+# Create destination directory.
 mkdir -p $tmpdir/DEBIAN
 mkdir -p $tmpdir/opt/$appname/bin
 mkdir -p $tmpdir/opt/$appname/lib
@@ -34,18 +34,18 @@ mkdir -p $tmpdir/usr/share/applications
 mkdir -p $tmpdir/usr/share/icons/hicolor/48x48/apps
 echo "The staging direcotry has been created."
 
-# Copy the DEBIAN control files.
+# Copy DEBIAN control files.
 cp -r debian/* $tmpdir/DEBIAN/
 echo "The DEBIAN control files have been copied to the staging directory."
 
-# Copy the deployed files.
+# Copy deployed files.
 cp -r $depdir/* $tmpdir/
 echo "The deployed files have been copied to the staging directory."
 
-# Create the DEBIAN package.
+# Create DEBIAN package.
 dpkg-deb --build $tmpdir $setupdir/$appname-$verison.deb
 echo "The DEBIAN package has been created."
 
-# Delete the staging directory.
+# Delete staging directory.
 rm -rf $tmpdir
 echo "The staging directory has been deleted."

@@ -6,4 +6,7 @@ else()
 endif()
 
 # Install target RUNTIME.
-install(DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIR}/${CMAKE_PROJECT_NAME}.app" DESTINATION "${CMAKE_INSTALL_PREFIX}/Applications")
+install(TARGETS ${CMAKE_PROJECT_NAME} BUNDLE DESTINATION "${CMAKE_INSTALL_PREFIX}/Applications/")
+
+# Install target RUNTIME dependencies.
+install(CODE "execute_process(COMMAND macdeployqt ${CMAKE_INSTALL_PREFIX}/Applications/${CMAKE_PROJECT_NAME}.app -verbose=1)")
