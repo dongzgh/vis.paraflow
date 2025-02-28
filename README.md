@@ -109,7 +109,7 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 #### Notes
 
-- Use the following commands to check the `debian` package:
+- Check the `debian` package:
 
 ```bash
 ar x visParaflow-<version>.deb
@@ -118,14 +118,14 @@ tar -xzf data.tar.gz -C tmp # for gz format
 tar -xvf data.tar.zst -C tmp # for zst format
 ```
 
-- Install/uninstall the package using:
+- Install/uninstall the package:
 
 ```bash
 sudo dpkg -i visParaflow-<version>.deb # install
 sudo dpkg -r visParaflow-<version>.deb # uninstall
 ```
 
-- Check and install missing libraries using:
+- Check and install missing libraries:
 
 ```bash
 # Check missing shared libraries.
@@ -148,6 +148,14 @@ sudo apt-get install libxcb-cursor0
 
 # Check PATH settings.
 export PATH=/usr/lib:/usr/lib/x86_64-linux-gnu
+```
+
+- Connect remote machine:
+
+```bash
+ssh -i ./vm_key.pem <azureuser>@40.76.3.96
+az vm open-port --resource-group playvm --name vm --port 3389
+scp -i ./vm_key.pem ./visParaflow-<version>.deb azureuser@40.76.3.96:/home/azureuser/
 ```
 
 ## Prepare Data
