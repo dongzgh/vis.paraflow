@@ -1,4 +1,4 @@
-# Set the CPack variables.
+# Set CPack variables.
 set(CPACK_PACKAGE_NAME ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VERSION ${CMAKE_PROJECT_VERSION})
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${CMAKE_PROJECT_DESCRIPTION}")
@@ -7,10 +7,10 @@ set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_DIRECTORY "${CMAKE_SOURCE_DIR}/setup/windows")
 
-# Set the CPack generator to NSIS.
+# Set CPack generator to NSIS.
 set(CPACK_GENERATOR NSIS)
 
-# Set the CPack variables for the NSIS package.
+# Set CPack variables for the NSIS package.
 set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/package/windows/app.ico")
 set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/package/windows/app.ico")
 set(CPACK_NSIS_DISPLAY_NAME ${CPACK_PACKAGE_NAME})
@@ -35,5 +35,5 @@ set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
 Delete '${SMPROGRAMS}\\\\${CPACK_PACKAGE_NAME}.lnk'
 Delete '${PDESKTOP}\\\\${CPACK_PACKAGE_NAME}.lnk'")  
 
-# Include the CPack module
+# Include CPack module
 include(CPack) # has to be after shortcuts instructions are set, otherwise the shortcuts won't be created
