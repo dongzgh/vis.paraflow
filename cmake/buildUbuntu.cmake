@@ -2,7 +2,7 @@
 add_executable(${CMAKE_PROJECT_NAME}
     ${Implementation_FILES}
     ${Header_FILES}
-    ${RESOURCES}
+    ${RESOURCE_FILE}
 )
 
 # Set link libraries.
