@@ -8,12 +8,12 @@ endif()
 # Install target RUNTIME.
 install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}")
 
-# Install system RUNTIME dependencies.
+# Install system runtime dependencies.
 set (CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE)
 include (InstallRequiredSystemLibraries)
 install (PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION "${CMAKE_INSTALL_PREFIX}")
 
-# Generarte script to install Qt RUNTIME dependencies.
+# Generarte script to install Qt runtime dependencies.
 qt_generate_deploy_script(
     TARGET ${CMAKE_PROJECT_NAME}
     OUTPUT_SCRIPT deploy_script

@@ -5,10 +5,10 @@ else()
     set(CMAKE_INSTALL_PREFIX "" CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 endif()
 
-# Install target RUNTIME.
+# Install target runtime.
 install(TARGETS ${CMAKE_PROJECT_NAME} RUNTIME_DEPENDENCY_SET RunTimeDependencySet RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/bin/" )
 
-# Install target RUNTIME dependencies.
+# Install target runtime dependencies.
 install(RUNTIME_DEPENDENCY_SET RunTimeDependencySet DESTINATION "${CMAKE_INSTALL_PREFIX}/opt/${CMAKE_PROJECT_NAME}/lib/")
 
 # Get Qt6 lib directory.
