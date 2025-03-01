@@ -1,13 +1,13 @@
 # Set windows specific resources.
-set(RESOURCE_WIN32 "res/resources.rc")
+set(WIN32_RESOURCE_FILE "res/resources.rc")
 
 # Add the executable target.
 add_executable(${CMAKE_PROJECT_NAME}
     WIN32
     ${Implementation_FILES}
     ${Header_FILES}
-    ${RESOURCES}
-    ${RESOURCE_WIN32}
+    ${RESOURCE_FILE}
+    ${WIN32_RESOURCE_FILE}
 )
 
 # Set link libraries.

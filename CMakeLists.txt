@@ -32,7 +32,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # Add the resource file
-qt_add_resources(RESOURCES "res/resources.qrc")
+qt_add_resources(RESOURCE_FILE "res/resources.qrc")
 
 # Collect the source files.
 file(GLOB Header_FILES "include/*.h")

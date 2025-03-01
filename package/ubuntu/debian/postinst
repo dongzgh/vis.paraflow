@@ -2,11 +2,11 @@
 set -e
 
 # Variables 
-appname="visParaflow"
-appdir="/opt/$appname"
+appName="visParaflow"
+appdir="/opt/$appName"
 
 # Copy the app script file to /usr/local/bin
-sudo mv $appdir/app.sh /usr/local/bin/$appname
-sudo chmod +x /usr/local/bin/$appname
+sudo mv $appdir/app.sh /usr/local/bin/$appName
+sudo chmod +x /usr/local/bin/$appName
 
 exit 0

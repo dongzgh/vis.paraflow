@@ -1,31 +1,28 @@
 #!/bin/bash
 
-# Set the working directory
+# Set working directory.
 cd "$(dirname "$0")"
 
-# Set the package names
-appname="visParaflow"
+# Set package name.
+appName="visParaflow"
 verison="1.0.0"
 
-# Set package directory
-pkgdir="app"
+# Define deployment directory.
+deployDir="../../deploy/macos"
+if [ ! -d $deployDir ]; then
+    echo "The deployment directory does not exist."
+    exit 1
+fi
 
-# Set build directory
-bindir="../../build/release/bin"
+# Define setup directory.
+setupDir="../../setup/macos"
+mkdir -p $setupDir
 
-# Copy app to the package directory
-mkdir -p $pkgdir
-cp -r $bindir/$appname.app $pkgdir/
-echo "The app has been copied to the package directory."
-
-# Deploy the app
-macdeployqt6 $pkgdir/$appname.app -always-overwrite -dmg
+# Deploy app.
+cd $deployDir
+macdeployqt6 $appName.app -always-overwrite -dmg
 echo "The app has been deployed."
 
-# Rename the app
-mv $pkgdir/$appname.dmg ./$appname-$verison.dmg
+# Rename app.
+mv $appName.dmg $setupDir/$appName-$verison.dmg
 echo "The app has been renamed."
-
-# Remove the package directory
-rm -rf $pkgdir
-echo "The package directory has been removed."
