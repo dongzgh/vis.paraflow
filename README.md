@@ -72,17 +72,23 @@ cd bin # vis.process/build/debug/bin or vis.process.process/build/release/bin
 
 ### Using `make-app.sh`
 
-- Open `make-app.sh` in Visual Studio Code
+- Turn off `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Install`
+- Deployable is created in the `deploy/ubuntu` folder
+- Open `package/macos/make-app.sh` in Visual Studio Code
 - `F1` to open `Command Palette` and select `Tasks: Run Task`
 - Select `Run Shell Script` from the drop down list
-- `DMG` package is created in the `package/macos` folder
+- `DMG` package is created in the `setup/macos` folder
 
 #### Using `cpack`
 
-- Open terminal in the `build/release` directory
-- Run `macdeployqt6 visParaflow.app`
-- Run `cpack`
-- `DMG` package is created in the `package/macos` folder
+- Turn on `USE_CPACK` variable in `CMakeLists.txt`
+- `F1` to open `Command Palette` and select `CMake: Delete Cache and Reconfig`
+- `F1` to open `Command Palette` and select `CMake: Clean Build`
+- `F1` to open `Command Palette` and select `CMake: Run CPack`
+- `DMG` package is created in the `setup/macos` folder and installed in `/Applications`
 
 ### Linux
 
