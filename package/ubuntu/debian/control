@@ -1,8 +1,0 @@
-Package: visParaflow
-Version: 1.0.0
-Section: base
-Priority: optional
-Architecture: amd64
-Depends: libc6 (>= 2.29)
-Maintainer: Dong Zhao
-Description: A tool for workflow modeling and script generation.
