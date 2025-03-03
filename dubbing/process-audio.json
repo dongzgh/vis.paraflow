@@ -1,0 +1,31 @@
+{
+  "module": "Process Audio",
+  "nodes": [
+    {
+      "name": "Transcribe Audio",
+      "description": "Transcribe audio.",
+      "icon": "transcribe.png",
+      "parameters": [
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "res/speech.wav",
+          "file": true,
+          "title": "Open Audio",
+          "filter": "Audio Files (*.wav;*.mp3);;All Files (*.*)"
+        },
+        {
+          "name": "Path",
+          "io": "in",
+          "type": "string",
+          "default": "out/transcription.json",
+          "file": true,
+          "title": "Save Transcription As",
+          "filter": "Transcription Files (*.json;*.txt);;All Files (*.*)"
+        }
+      ],
+      "template": "transcribe.py"
+    }
+  ]
+}
