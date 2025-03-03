@@ -4,8 +4,8 @@ This repository is for accumulating assets to be used for visParaflow workflow m
 
 ## Asset List
 
+- `dubbing/`: Contains dubbing processing assets and related configurations.
 - `image/`: Contains image processing assets and related configurations.
-- `video/`: Contains video assets and related configurations.
 
 ## Working on Assets
 
